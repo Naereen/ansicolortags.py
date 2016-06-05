@@ -1,3 +1,18 @@
+#!/usr/bin/env make
+# Author:	Lilian Besson
+# Email:	lilian DOT besson AT ens-cachan D O T org
+# Version:	1
+# Date:		05/06/16
+#
+# Makefile for the git repository ansicolortags.py
+# https://bitbucket.org/lbesson/ansicolortags.py
+#
+# References:
+#  - http://the-hitchhikers-guide-to-packaging.readthedocs.io/en/latest/quickstart.html#lay-out-your-project
+#  - https://packaging.python.org/en/latest/distributing/#uploading-your-project-to-pypi
+#  - https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/
+#
+###############################################################################
 # Makefile for Sphinx documentation
 # You can set these variables from the command line.
 SPHINXOPTS    =
@@ -16,19 +31,28 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
 ###############################################################################
 # Custom items
-CP = /usr/bin/rsync --verbose --times --perms --compress --human-readable --progress --archive
-#CP = scp
+# CP = /usr/bin/rsync --verbose --compress --human-readable --progress --archive --delete --exclude=\.htaccess
+# CP = scp
+CP = /home/lilian/bin/CP --delete --exclude=\.htaccess --exclude=\.git --exclude=.*~
+GPG = gpg --no-batch --use-agent --detach-sign --armor --quiet --yes
 
-total:	cleanALL all sendAll pypi pythonhosted_doc clean_pyc notify
+total:	cleanAll dochtml sendAll pypi pythonhosted_doc clean_pyc notify
 
-local:	cleanALL all notify
+local:	cleanAll dochtml notify
 
-complete:	cleanALL all sendAll notify
+dochtml:	coverage html clean_pyc
 
-all:	coverage html clean_pyc
+pypi:	pypi_sdist wheel pypi_upload
 
-pypi:
-	./setup.py sdist upload --sign
+pypi_sdist:
+	./setup.py sdist
+
+wheel:
+	./setup.py bdist_wheel --universal
+
+pypi_upload:
+	# ./setup.py sdist upload --sign
+	twine upload dist/*
 
 pythonhosted_doc:
 	./pythonhosted_doc.sh
@@ -36,23 +60,27 @@ pythonhosted_doc:
 notify:
 	notify-send "Sphinx" "Generating documentation : done !"
 
-notify_archive: archive
-	notify-send "Sphinx : archiving" "Generating archive : done ! (~/ansicolortags.tar.gz)"
+notify_archive:	archive
+	notify-send "Sphinx : archiving" "Generating archive : done ! (/home/lilian/ansicolortags.tar.gz)"
 
-cleanALL: clean_build clean_pyc
+cleanAll: clean_build clean_pyc
+
+pylint3k:
+	pylint --py3k ansicolortags.py | less
 
 pylint:
-	pylint [A-Z]*.py
+	pylint ansicolortags.py | less
 
-archive: clean_pyc
-	if [ -f ~/ansicolortags.tar.xz ]; then mv -f ~/ansicolortags.tar.xz ~/Dropbox/ ; fi
-	tar -Jcvf ~/ansicolortags.tar.xz ./
+archive:	clean_pyc
+	if [ -f /home/lilian/ansicolortags.tar.xz ]; then mv -f /home/lilian/ansicolortags.tar.xz /home/lilian/Dropbox/ ; fi
+	$(GPG) /home/lilian/ansicolortags.tar.xz
+	tar -Jcvf /home/lilian/ansicolortags.tar.xz ./
 
 sendAll: notify_archive send_zamok
 
 send_zamok:
-	$(CP) -r ./ besson@zamok.crans.org:~/www/publis/ansi-colors/
-	$(CP) ~/ansicolortags.tar.xz besson@zamok.crans.org:~/www/
+	$(CP) -r ./ besson@zamok.crans.org:/home/lilian/www/publis/ansicolortags.py/
+	$(CP) /home/lilian/ansicolortags.tar.xz* besson@zamok.crans.org:/home/lilian/www/publis/
 
 clean_pyc:
 	rm -f *.*~ *.py[co] */*.*~ */*.py[co]
@@ -61,44 +89,46 @@ clean_pyc:
 clean_build:
 	rm -rf _build/* .build/*
 
-coverage:
-	$(SPHINXBUILD) -b coverage $(ALLSPHINXOPTS) $(BUILDDIR)/coverage
-	@echo
-	@echo "Build finished. The coverage pages are in $(BUILDDIR)/coverage."
-
 git:
-	git add *.py *.rst README.md Makefile INSTALL LICENSE
-	git commit -m "Autocommit with 'make git'"
+	git add ./*.py ./*.rst README.md Makefile INSTALL LICENSE
+	git commit -m "Auto commit with 'make git'."
 	git push
+
+stats:
+	+git-complete-stats.sh | tee ./complete-stats.txt
+	git wdiff ./complete-stats.txt
+
+cloudwords:
+	generate-word-cloud.py -s -m 75 -t "Words from ansicolortags.py - (C) 2016 Lilian Besson" ./*.{rst,txt,md,py}
+	# generate-word-cloud.py -f -o ./cloudwords.png -m 75 -t "Words from ansicolortags.py - (C) 2016 Lilian Besson" ./*.{rst,txt,md,py}
 
 ########################## End of custom stuffs ###############################
 ###############################################################################
 
 
 help:
-	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  html       to make standalone HTML files"
-	@echo "  dirhtml    to make HTML files named index.html in directories"
-	@echo "  singlehtml to make a single large HTML file"
-	@echo "  pickle     to make pickle files"
-	@echo "  json       to make JSON files"
-	@echo "  htmlhelp   to make HTML files and a HTML help project"
-	@echo "  qthelp     to make HTML files and a qthelp project"
-	@echo "  devhelp    to make HTML files and a Devhelp project"
-	@echo "  epub       to make an epub"
-	@echo "  latex      to make LaTeX files, you can set PAPER=a4 or PAPER=letter"
-	@echo "  latexpdf   to make LaTeX files and run them through pdflatex"
-	@echo "  text       to make text files"
-	@echo "  man        to make manual pages"
-	@echo "  texinfo    to make Texinfo files"
-	@echo "  info       to make Texinfo files and run them through makeinfo"
-	@echo "  gettext    to make PO message catalogs"
-	@echo "  changes    to make an overview of all changed/added/deprecated items"
-	@echo "  linkcheck  to check all external links for integrity"
-	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
+	@echo "Please use 'make <target>' where <target> is one of :"
+	@echo "    html       to make standalone HTML files"
+	@echo "    pypi       to upload the file on pypi (require twine)"
+	@echo "    cleanAll   to XXX"
+	@echo "    pylint     to XXX"
+	@echo "    archive    to XXX"
+	@echo "    sendAll    to upload the files on my personal website"
+	@echo "    stats      to update the complete-stats.txt file"
+	@echo "    cloudwords to create a small cloudwords.png file from the ./*.{rst,txt,md,py} files"
+	@echo "    changes    to make an overview of all changed/added/deprecated items"
+	@echo "    linkcheck  to check all external links for integrity"
+	@echo "    doctest    to run all doctests embedded in the documentation (if enabled)"
+	@echo "    coverage   to check which parts are documented"
+	@echo "    pythonhosted_doc       to prepare the zip file to upload on pythonhosted.org (not anymore)"
 
 clean:
 	-rm -rf $(BUILDDIR)/*
+
+coverage:
+	$(SPHINXBUILD) -b coverage $(ALLSPHINXOPTS) $(BUILDDIR)/coverage
+	@echo
+	@echo "Build finished. The coverage pages are in $(BUILDDIR)/coverage."
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
