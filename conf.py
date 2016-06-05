@@ -155,11 +155,11 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # html_static_path = ['.static']
 
 # Sphinx will add “permalinks” for each heading and description environment as paragraph signs that become visible when the mouse hovers over them.
-html_add_permalinks = True
+# html_add_permalinks = True
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
-html_last_updated_fmt = u'%A %d/%m/%Y, %Hh:%Mm:%Ss'
+html_last_updated_fmt = u'%H:%M:%S the %A %d/%m/%Y'
 
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
@@ -236,7 +236,7 @@ latex_documents = [
 latex_show_pagerefs = True
 
 # If true, show URL addresses after external links.
-latex_show_urls = True
+# latex_show_urls = True
 
 # Documents to append as an appendix to all manuals.
 # latex_appendices = []

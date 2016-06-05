@@ -1,0 +1,58 @@
+Installation
+------------
+
+Dependencies
+~~~~~~~~~~~~
+
+The project is entirely written in Python, version 2.7.3.
+For more details about the Python language, see `the official site <https://www.python.org/>`_.
+Python 2.7+ or Python 3.4+ is required.
+
+How to install it ?
+~~~~~~~~~~~~~~~~~~~
+There is three different ways:
+
+1. Directly, with pip
+^^^^^^^^^^^^^^^^^^^^^
+It can be installed with ``pip``: ::
+
+    pip install ansicolortags
+
+On GNU/Linux, it might be necessary to give it sudo rights: ::
+
+    sudo pip install ansicolortags
+
+
+2. Download, extract, and use setup.py
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Or you can also :
+
+ 1. download the file, `from PyPi <https://pypi.python.org/pypi/ansicolortags>`_;
+
+ 2. extract it (with :code:`tar xzfv`, or a graphical solution, like File Roller);
+
+ 3. then go in the subdirectory (:code:`cd ansicolortags-v0.1/`);
+
+ 4. and finally with Python distutils setup tool:
+
+    .. code:: bash
+
+       $ python setup.py install
+
+    Or maybe with sudo rights, if the first try did not work :
+
+    .. code:: bash
+
+       $ sudo python setup.py install
+
+
+3. Without installing it
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Note that installation *is not mandatory* :
+a third solution is to simply include JUST the file ``ansicolortags.py``,
+and embed it in your own projects.
+The project can be used without installing *anything elsewhere*.
+
+.. (c) Lilian Besson 2012-2016

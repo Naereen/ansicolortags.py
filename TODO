@@ -1,0 +1,27 @@
+===============================
+TODOs for ansicolortags package
+===============================
+
+Passing to Python v3+
+---------------------
+
+* clean up the code
+* make it fully pylint clean
+* make it fully compatible with Python 3+
+* republish it cleanly (on Pypi, doc on readthedocs.io and not pythonhosted.org)
+
+Last time I tried, it was not OK :
+
+* problem when converting with the ``2to3`` tool :
+
+  * tab and space inconsistencies,
+  * the :code:`except:` is durty,
+  * the whole code is durty !
+
+Other changes
+-------------
+
+1. Improve support of Windows.
+2. Add automated tools.
+
+.. (c) Lilian Besson 2012-2016

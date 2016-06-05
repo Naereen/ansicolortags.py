@@ -6,3 +6,5 @@ ansicolortags module
     :private-members:
     :special-members:
     :show-inheritance:
+
+.. (c) Lilian Besson 2012-2016
