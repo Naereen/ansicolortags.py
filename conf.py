@@ -112,6 +112,13 @@ autodoc_default_flags = ['members', 'private-members', 'undoc-members', 'special
 # Pour trier dans l'ordre du code et non pas par ordre alphabétique
 autodoc_member_order = 'bysource'
 
+# Add a small piece of rST text in the prolog/epilog of EVERY file
+# http://www.sphinx-doc.org/en/stable/config.html#confval-rst_prolog
+# rst_prolog = """
+rst_epilog = """
+.. include:: .special.rst
+"""
+
 
 # -- Options for HTML output ---------------------------------------------------
 
@@ -152,7 +159,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-# html_static_path = ['.static']
+html_static_path = ['.static']
 
 # Sphinx will add “permalinks” for each heading and description environment as paragraph signs that become visible when the mouse hovers over them.
 # html_add_permalinks = True

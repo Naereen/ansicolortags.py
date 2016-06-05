@@ -1,0 +1,15 @@
+{#
+    .templates/layout.html
+    ~~~~~~~~~~~~~~~~~~~~~~
+
+    Page principale. (default version)
+
+    :copyright: Copyright 2013-2016 Lilian Besson
+    :license:   https://lbesson.mit-license.org/
+#}
+{% extends "!layout.html" %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{{ pathto('_static/hacks.css', true)|e }}" />
+{{ super() }}
+{% endblock %}
