@@ -1,16 +1,11 @@
 ===============================
 TODOs for ansicolortags package
 ===============================
-
-Passing to Python v3+
----------------------
-
-* FIXME correct the issue: the colors are NOT printed in Python3 !
-
 Publish
 -------
 
-* republish it cleanly (on Pypi, doc on readthedocs.io and not pythonhosted.org)
+1. republish it cleanly on Pypi
+2. add badges and stuff ?
 
 
 Other changes

@@ -354,30 +354,37 @@ colorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'whit
 #: List of all simple colors.
 simpleColorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
 
+colorDict = dict()
 
 # Backup all colors.
 for name in colorList:
     exec('_%s = %s' % (name, name))  # Bad to use exec !
+    exec('colorDict["%s"] = %s' % (name, name))  # Bad to use exec !
 
 # Turn off color tags interpretation if they are not supported
 if not ANSISupported:
+    # print("DEBUG: removing colors!")
     for name in colorList:
         exec('%s = \"\"' % name)  # Bad to use exec !
 
+# print("DEBUG: colorList =", colorList)
 
-def tocolor(string):
-    """ tocolor(string) -> string
+
+def tocolor(mystring):
+    """ tocolor(mystring) -> string
 
     Convert a string to a color.
-    ``string`` **have** to be in :py:data:`colorList` to be recognized (and interpreted).
-    Default value if ``string`` is not one of the color name is ``""`` the empty string.
+    ``mystring`` **have** to be in :py:data:`colorList` to be recognized (and interpreted).
+    Default value if ``mystring`` is not one of the color name is ``""`` the empty string.
     """
-    if string in colorList:
-        res = ""
-        exec('res = %s' % string)  # Bad to use exec !
-        return res
-    else:
-        return ""
+    res = ""
+    if mystring in colorList:
+        # print("DEBUG: Calling exec('res = %s' % {})".format(mystring))  # Bad to use exec !
+        # exec("res = %s" % mystring)  # Bad to use exec !
+        res = colorDict[mystring]
+        # print("DEBUG: res =", res)
+    # print("DEBUG: tocolor({}) -> {}".format(mystring, res))
+    return res
 
 
 def sprint(chainWithTags, left='<', right='>', verbose=False):
@@ -420,8 +427,9 @@ def sprint(chainWithTags, left='<', right='>', verbose=False):
             print("\tinte =", inte)
         if inte[0] in colorList:
             inte[0] = tocolor(inte[0])
-        elif len(inte) > 1:
-            inte[0] = left + inte[0] + right
+        else:
+            if len(inte) > 1:
+                inte[0] = left + inte[0] + right
         if verbose:
             print("\tinte =", inte)
         lls.append(inte)
@@ -459,8 +467,9 @@ def erase(chainWithTags, left='<', right='>', verbose=False):
             print("\tinte =", inte)
         if inte[0] in colorList:
             inte[0] = ''  #: Here the 'erasure' is made.
-        elif len(inte) > 1:
-            inte[0] = left + inte[0] + right
+        else:
+            if len(inte) > 1:
+                inte[0] = left + inte[0] + right
         if verbose:
             print("\tinte =", inte)
         lls.append(inte)
