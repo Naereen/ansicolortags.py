@@ -5,8 +5,7 @@ TODOs for ansicolortags package
 Passing to Python v3+
 ---------------------
 
-* make it fully pylint clean
-* make it fully compatible with Python 3+
+* FIXME correct the issue: the colors are NOT printed in Python3 !
 
 Publish
 -------
@@ -19,6 +18,6 @@ Other changes
 
 1. Improve support of Windows.
 2. Add automated tests.
-3. Durty to use all these ``exec()``, should be avoided.
+3. Durty to use all these ``exec()``, should be avoided... Find something cleaner!
 
 .. (c) Lilian Besson 2012-2016

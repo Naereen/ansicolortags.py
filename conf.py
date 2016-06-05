@@ -34,9 +34,11 @@ extensions = [
     'sphinx.ext.coverage',
     # 'sphinx.ext.mathjax',
     'sphinx.ext.viewcode',
-    # From https://bitbucket.org/birkenfeld/sphinx-contrib/
-    'sphinxcontrib.googleanalytics',
 ]
+
+if os.getenv('USER') == 'lilian':
+    # From https://bitbucket.org/birkenfeld/sphinx-contrib/
+    extensions.append('sphinxcontrib.googleanalytics')
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['.templates']

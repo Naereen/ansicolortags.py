@@ -279,6 +279,7 @@ except Exception as e:
     print("I failed badly when trying to detect if ansicolortags are supported, reason = %s" % e)
     ANSISupported = False
 
+# print("DEBUG: ANSISupported =", ANSISupported)
 
 # colors bold
 black = "\033[01;30m"    #: :black:`Black` and bold.
