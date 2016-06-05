@@ -109,4 +109,11 @@ The MIT License (MIT)
 ---------------------
 .. include:: LICENSE
 
+------------------------------------------------------------------------------
+
+Cloud of words
+--------------
+
+.. image:: cloudwords.png
+
 .. (c) Lilian Besson 2012-2016

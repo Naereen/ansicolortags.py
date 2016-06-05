@@ -77,14 +77,15 @@ pydoctxt:
 
 archive:	clean_pyc
 	if [ -f /home/lilian/ansicolortags.tar.xz ]; then mv -f /home/lilian/ansicolortags.tar.xz /home/lilian/Dropbox/ ; fi
-	$(GPG) /home/lilian/ansicolortags.tar.xz
 	tar -Jcvf /home/lilian/ansicolortags.tar.xz ./
+	$(GPG) /home/lilian/ansicolortags.tar.xz
 
 sendAll: notify_archive send_zamok
 
 send_zamok:
-	$(CP) -r ./ besson@zamok.crans.org:/home/lilian/www/publis/ansicolortags.py/
-	$(CP) /home/lilian/ansicolortags.tar.xz* besson@zamok.crans.org:/home/lilian/www/publis/
+	# $(CP) -r ./ besson@zamok.crans.org:~/www/publis/ansicolortags.py/
+	$(CP) -r ./.build/html/ besson@zamok.crans.org:~/www/publis/ansicolortags.py/
+	$(CP) /home/lilian/ansicolortags.tar.xz* besson@zamok.crans.org:~/www/publis/
 
 clean_pyc:
 	rm -f *.*~ *.py[co] */*.*~ */*.py[co]
@@ -103,8 +104,8 @@ stats:
 	git wdiff ./complete-stats.txt
 
 cloudwords:
-	generate-word-cloud.py -s -m 75 -t "Words from ansicolortags.py - (C) 2016 Lilian Besson" ./*.{rst,txt,md,py}
-	# generate-word-cloud.py -f -o ./cloudwords.png -m 75 -t "Words from ansicolortags.py - (C) 2016 Lilian Besson" ./*.{rst,txt,md,py}
+	generate-word-cloud.py -s -m 100 -t "Words from ansicolortags.py - (C) 2016 Lilian Besson" *.rst *.txt *.md *.py
+	generate-word-cloud.py -f -o ./cloudwords.png -m 100 -t "Words from ansicolortags.py - (C) 2016 Lilian Besson" *.rst *.txt *.md *.py
 
 ########################## End of custom stuffs ###############################
 ###############################################################################
