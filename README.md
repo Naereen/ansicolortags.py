@@ -3,6 +3,8 @@ ansicolortags
 
 [A Python script and module](https://bitbucket.org/lbesson/ansicolortags.py/) to simply use ANSI colors in a terminal application from a Python program.
 
+![Documentation on ansicolortags.readthedocs.io](https://readthedocs.org/projects/ansicolortags/badge/?version=latest "Documentation on ansicolortags.readthedocs.io")
+
 ![Screenshot of the doc, colored with the script](examples/example1.png "Screenshot of the doc, colored with the script")
 
 ----

@@ -42,7 +42,10 @@ local:	cleanAll dochtml notify
 
 dochtml:	coverage html clean_pyc
 
-pypi:	pypi_sdist wheel pypi_upload
+pypi:	pypi_check pypi_sdist pypi_upload
+
+pypi_check:
+	./setup.py check
 
 pypi_sdist:
 	./setup.py sdist

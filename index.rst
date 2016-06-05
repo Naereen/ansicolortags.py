@@ -100,6 +100,9 @@ Table of contents
 This project is currently in version |version|, release |release|.
 Last update of this doc was made |today|.
 
+.. image:: https://readthedocs.org/projects/ansicolortags/badge/?version=latest
+   :target: http://ansicolortags.readthedocs.io/
+
 .. note::  This project is based on my old `ANSIColors-balises <https://pypi.python.org/pypi/ANSIColors-balises>`_ project, which was only for Python 2.7.
 
 
