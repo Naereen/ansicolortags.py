@@ -1,0 +1,350 @@
+Help on module ansicolortags:
+
+NAME
+    ansicolortags
+
+FILE
+    /home/lilian/publis/ansicolortags.py/ansicolortags.py
+
+DESCRIPTION
+    An efficient and simple ANSI colors module (and also a powerful script), with functions to print text using colors.
+    https://bitbucket.org/lbesson/ansicolors.py
+    
+    
+    The names of the colors follow these conventions:
+    
+    * for the eight ANSI colors (:black:`black`, :red:`red`, :green:`green`, :yellow:`yellow`, :blue:`blue`, :magenta:`magenta`, :cyan:`cyan`, :white:`white`):
+    
+      + the name in minuscule is for color **with bold** (example ':yellow:`yellow`'),
+      + the name starting with 'B' is for color **without bold** (example ':yellow:`Byellow`'),
+      + the name starting with a **capital** letter is for the background color (example ':yellow:`Yellow`').
+    
+    * for the special effects (:blink:`blink`, *italic*, **bold**, :under:`underline`, negative), they might not always be supported, but they usually are:
+    
+      + the name in minuscule is used to turn *on* the effect (example 'i' to turn on italic),
+      + the name starting in capital letter is used to turn *down* the effect (example 'I' to turn off italic).
+    
+    * for the other special effects (``nocolors``, ``default``, ``Default``, ``clear``, ``el``), the effect is **immediate** (and seems to be well supported).
+    
+    
+    List of functions
+    =================
+    
+    To print a string
+    -----------------
+    
+    * :py:func:`sprint`: give a string,
+    * :py:func:`printc`: like __builtin__.print, but with interpreting tags to put colors,
+    * :py:func:`writec`: like printc, but using any file object (and no new line added at the end of the string).
+    
+    To clean the terminal or the line
+    ---------------------------------
+    
+    * :py:func:`erase`: erase all ANSI colors tags in the string (like sprint, but erasing and not interpreting color tags),
+    * :py:func:`clearLine`, :py:func:`clearScreen`: to clear the current line or screen,
+    * :py:func:`Reset`: to return to default foreground and background, and stopping all *fancy* effects (like blinking or reverse video).
+    
+    Others functions
+    ----------------
+    
+    * :py:func:`notify`: try to display a *system* notification. **Only on GNU/Linux with notify-send installed.**
+    * :py:func:`xtitle`: try to set the *title* of the terminal. Warning: **not always supported**.
+    
+    
+    Example of use (module)
+    =======================
+    
+    To store a string, use :py:func:`sprint` (i.e. print to a string, *sprint*), like this: ::
+    
+        >>> example = sprint("France flag is <blue>blue<white>white<red>red<white>, Italy flag have <green>green on it<white>.")
+    
+    
+    The string ``example`` can then be printed, with colors, with: ::
+    
+        >>> print(example)  # Sorry, but in the documentation it is hard to show colors :)
+        France flag is bluewhitered, Italy flag have green on it.
+    
+    
+    To directly print a string colored by tags, use :py:func:`printc`: ::
+    
+        >>> printc("Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>.")
+    
+    
+    .. seealso::
+    
+       This is the most useful function. To do the same, but on any file, use :py:func:`writec`.
+    
+    
+    Moreover, the function :py:func:`erase` can also be useful to simply delete all *valid* color tags ::
+    
+        >>> print(erase("Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>, and this is a non-valid <tag>, so it is kept like this."))
+        Batman's costum is black, Aquaman's costum is blue and green, and this is a non-valid <tag>, so it is kept like this
+    
+    
+    In this last example, an ``<el>`` tag (:py:data:`el`) is used to erase the current content of the line, useful to make a *dynamical* print ::
+    
+       >>> writec("<red>Computing <u>len(str(2**562016))<reset>...."); tmp = len(str(2**562016)); writec("<el><green>Done !<reset>")
+       Done !
+    
+    The first part of the line 'Computing len(str(2**562016))....' have disappeared after the computation! (which takes about one second).
+    
+    
+    Example of use (script)
+    =======================
+    
+    * To show the help :code:`$ ansicolortags.py --help`;
+    
+    * To run a test :code:`$ ansicolortags.py --test`;
+    
+    * To produce a `GNU Bash color aliases file <https://bitbucket.org/lbesson/bin/src/master/.color.sh>`_ :code:`$ ansicolortags.py --generate --file ~/.color_aliases.sh`.
+    
+    
+    Auto detection
+    ==============
+    
+    This script can normally detect if ANSI codes are supported :
+    
+      1. ``$ ansicolortags.py --help`` : will print with colors if colors seems to be supported;
+      2. ``$ ansicolortags.py --help --noANSI`` : will print without any colors, even if it is possible;
+      3. ``$ ansicolortags.py --help --ANSI`` : will force the use of colors, even if they seems to be not supported.
+    
+    And, the module part behaves exactly like the script part.
+    
+    ------------------------------------------------------------------------------
+    
+    About
+    =====
+    
+    This project can be found on-line:
+    
+    * `here on BitBucket <https://bitbucket.org/lbesson/ansicolors.py>`_;
+    * `here on PyPi <https://pypi.python.org/pypi/ansicolors>`_.
+    
+    
+    * The reference page for ANSI code is : `here on Wikipedia <https://en.wikipedia.org/wiki/ANSI_escape_code>`_.
+    * The reference page for XTitle escape code is : `here <http://www.faqs.org/docs/Linux-mini/Xterm-Title.html>`_.
+    
+    Complete documentation
+    ======================
+    
+    The doc is available on-line, on `Read the Docs <https://www.readthedocs.org/>`_ :
+    `<http://ansicolortags.readthedocs.io/>`_ !
+    
+    Copyrigth
+    =========
+    
+    © Lilian Besson, 2012-2016.
+
+FUNCTIONS
+    Reset()
+        Reset() -> unit
+        
+        Try to reset the current ANSI codes buffer, using :py:data:`reset`.
+    
+    clearLine()
+        clearLine() -> unit
+        
+        Try to clear the current line using ANSI code :py:data:`el`.
+    
+    clearScreen()
+        clearScreen() -> unit
+        
+        Try to clear the screen using ANSI code :py:data:`clear`.
+    
+    erase(chainWithTags, left='<', right='>', verbose=False)
+        erase(chainWithTags, left = '<', right = '>', verbose = False) -> string
+        
+        Parse a string containing color tags, when color is one of the previous define name,
+        and then return it, with color tags **erased**.
+        
+        Example:
+        
+          >>> print(erase("<blue>This is blue.<white> And <this> is white.<red> Now this is red because I am <angry> !<reset>"))
+          This is blue. And <this> is white. Now this is red because I am <angry> !
+        
+        This example seems exactly the same that the previous one in the documentation, but it's not (it is impossible to put color in the output of a Python example in Sphinx documentation, so there is **no color in output** in the examples... but be sure there is the real output !).
+    
+    notify(msg='', obj='Notification sent by ansicolortags.notify', icon=None, verb=False)
+        notify(msg='', obj='Notification sent by ansicolortags.notify', icon=None, verb=False) -> bool
+        
+        Notification using :py:mod:`subprocess` and ``notify-send`` (GNU/Linux command-line program).
+        Also print the informations directly to the screen (only if verb=True).
+        
+        .. warning::
+        
+           This does not use any *ANSI escape* codes, but the common *notify-send* GNU/Linux command line program.
+           It will probably fail (but cleanly) on Windows or Mac OS X.
+        
+        - Return True if and only if the title have been correctly changed.
+        - Fails simply if ``notify-send`` is not found.
+    
+    printc(chainWithTags, left='<', right='>')
+        printc(chainWithTags, left = '<', right = '>') -> unit
+        
+        A shortcut to ``print(sprint(chainWithTags))`` : analyze all tags, and print the result.
+    
+    sleep(...)
+        sleep(seconds)
+        
+        Delay execution for a given number of seconds.  The argument may be
+        a floating point number for subsecond precision.
+    
+    sprint(chainWithTags, left='<', right='>', verbose=False)
+        sprint(chainWithTags, left='<', right='>', verbose=False) -> string
+        
+        Parse a string containing color tags, when color is one of the previous define name,
+        and then return it, with color tags changed to concrete ANSI color codes.
+        
+        **Tags are delimited** by ``left`` and ``right``.
+        By default, it's `HTML / Pango style <https://developer.gnome.org/pygtk/stable/pango-markup-language.html>`_ whit '<' and '>', but you can change them.
+        
+        For example, a custom style even closer to HTML could be: ``left='<span color='`` and ``right = '</span>'`` is also possible.
+        
+        .. warning::
+        
+           It is more prudent to put nothing else than ANSI Colors (i.e. values in :py:data:`colorList`) between ``'<'`` and ``'>'`` in ``chainWithTags``.
+           The behavior of the function in case of false tags **is not perfect**.
+           Moreover, a good idea could be to try not to use '<' or '>' for anything else than tags.
+           I know, it's not perfect.
+           But, the syntax of color tags is so simple and so beautiful with this limitation that you will surely forgive me this, *won't you* ;) ?
+        
+        Example: ::
+        
+            >>> print(sprint("<blue>This is blue.<white> And <this> is white.<red> Now this is red because I am <angry> !<green><white>"))
+            This is blue. And <this> is white. Now this is red because I am <angry> !
+        
+        
+         This function is used in all the following, so all other function can also use ``left`` and ``right`` arguments.
+    
+    tocolor(string)
+        tocolor(string) -> string
+        
+        Convert a string to a color.
+        ``string`` **have** to be in :py:data:`colorList` to be recognized (and interpreted).
+        Default value if ``string`` is not one of the color name is ``""`` the empty string.
+    
+    writec(chainWithTags='', out=<open file '<stdout>', mode 'w'>, left='<', right='>', flush=True)
+        writec(chainWithTags="", out=sys.stdout, left='<', right='>', flush=True) -> unit
+        
+        Useful to print colored text **to a file**, represented by the object ``out``.
+        Also useful to print colored text, but without any trailing '\n' character.
+        
+        Example:
+        
+        In this example, before the long computation begin, it prints 'Computing 2**(2**(2**4)).....',
+        and when the computation is done, erases the current line (with ``<el>`` tag, :py:data:`el`),
+        and prints ' Done !' in green, and the result of the computation: ::
+        
+             >>> writec("<red>Computing<reset> 2**(2**(2**4))....."); tmp = 2**(2**(2**4)); writec("<el><green>Done !<reset>")
+        
+        
+        This example show how to use this module to write colored data in a file.
+        Be aware that this file now contains ANSI escape sequences.
+        For example, :code:`$ cat /tmp/colored-text.txt` will well print the colors, but editing the file will show *hard values* of escape code: ::
+        
+            >>> my_file = open('/tmp/colored-text.txt', mode = 'w')  # Opens an random file.
+            >>> write("<blue>this is blue.<white>And <this> is white.<red>Now this is red because I am <angry> !<green><white>", file = my_file)
+        
+        Remark:
+        Can also be used to simply reinitialize the ANSI colors buffer, but the function :py:func:`Reset` is here for this: ::
+        
+            >>> writec("<reset>")
+        
+        
+        .. warning::
+        
+           The file ``out`` **will be flushed** by this function if ``flush`` is set to ``True`` (this is default behavior).
+           If you prefer no to, use ``flush=False`` option: ::
+        
+               >>> writec(chainWithTags_1, out=my_file, flush=False)
+               >>> # many things...
+               >>> writec(chainWithTags_n, out=my_file, flush=False)
+               >>> my_file.flush()  # only flush here!
+    
+    xtitle(new_title='', verb=False)
+        xtitle(new_title="", verb=False) -> 0 or 1
+        
+        **Modify the current terminal title**.
+        Returns 0 if one of the two solutions worked, 1 otherwise.
+        
+        An experimental try is with **ANSI escape code**,
+        if the simple way by calling the ``xtitle`` program does not work (or if it is not installed).
+        
+        .. note::
+        
+           The second solution simply uses the two *ANSI* Tags ``<title>`` (:py:data:`title`) and ``<bell>`` (:py:data:`bell`).
+           So, you can also do it with: ::
+        
+               >>> ansicolortags.writec("<title>This is the new title of the terminal<bell>")
+        
+        
+        But this function *xtitle* is better: it tries two ways, and returns a signal to inform about his success.
+
+DATA
+    ANSISupported = False
+    B = ''
+    Bblack = ''
+    Bblue = ''
+    Bcyan = ''
+    Bgreen = ''
+    Black = ''
+    Blink = ''
+    Blue = ''
+    Bmagenta = ''
+    Bred = ''
+    Bwhite = ''
+    Byellow = ''
+    Cyan = ''
+    Default = ''
+    ERROR = ''
+    Green = ''
+    INFO = ''
+    Italic = ''
+    Magenta = ''
+    Neg = ''
+    Red = ''
+    U = ''
+    WARNING = ''
+    White = ''
+    Yellow = ''
+    __author__ = 'Lilian Besson'
+    __date__ = '2016-06-05T22:27:50+02:00'
+    __version__ = '0.1'
+    absolute_import = _Feature((2, 5, 0, 'alpha', 1), (3, 0, 0, 'alpha', 0...
+    b = ''
+    bell = ''
+    black = ''
+    blink = ''
+    blue = ''
+    clear = ''
+    colorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cy...
+    cyan = ''
+    default = ''
+    el = ''
+    green = ''
+    italic = ''
+    magenta = ''
+    name = 'INFO'
+    neg = ''
+    nocolors = ''
+    print_function = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0)...
+    question = ''
+    red = ''
+    reset = ''
+    simpleColorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta...
+    title = ''
+    u = ''
+    warning = ''
+    white = ''
+    yellow = ''
+
+VERSION
+    0.1
+
+DATE
+    2016-06-05T22:27:50+02:00
+
+AUTHOR
+    Lilian Besson
+
+

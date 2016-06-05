@@ -69,7 +69,11 @@ pylint3k:
 	pylint --py3k ansicolortags.py | less
 
 pylint:
-	pylint ansicolortags.py | less
+	pylint -d broad-except,exec-used ansicolortags.py > ansicolortags.pylint.txt
+	pylint -d broad-except,exec-used ansicolortags.py | less
+
+pydoctxt:
+	pydoc ansicolortags > ansicolortags.pydoc.txt
 
 archive:	clean_pyc
 	if [ -f /home/lilian/ansicolortags.tar.xz ]; then mv -f /home/lilian/ansicolortags.tar.xz /home/lilian/Dropbox/ ; fi
