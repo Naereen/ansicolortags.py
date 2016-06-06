@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# From ansicolortags.py module, auto generated with -g option
+# From ansicolortags.py module, auto generated with the --generate command
 # More information on https://bitbucket.org/lbesson/ansicolortags.py/
 #
 # About the convention for the names of the colors :
@@ -15,16 +15,16 @@
 #
 # About
 # =====
-#   Use this script with other GNU Bash scripts, simply by importing him with
-#    $ . ~/.color.sh
+# Use this file .color.sh in other GNU Bash scripts, simply by sourcing him with
+# $ source ~/.color.sh
 #
 # Copyrigth
 # =========
 # (C) Lilian Besson, 2012-2016.
 #
-# List of colors:
-# ===============
-    export black="\033[01;30m"
+# List of colors
+# ==============
+export black="\033[01;30m"
 export red="\033[01;31m"
 export green="\033[01;32m"
 export yellow="\033[01;33m"

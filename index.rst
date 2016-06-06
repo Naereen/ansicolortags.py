@@ -30,15 +30,15 @@ For instance, a quick description of super hero's costumes can be done like this
     >>> printc("<reset><white>Batman's costume is <black>black<white>, Aquaman's costume is <blue>blue<white> and <green>green<white>, and Superman's costume is <red>red<white> and <blue>blue<white> ...")
     Batman's costume is black, Aquaman's costume is blue and green, and Superman's costume is red and blue ...
 
-Sorry, but it is hard to embed colors in a Sphinx generated web pages.
+(Sorry, but it is hard to embed colors in the output of a Python command in a `Sphinx generated web-pages <http://sphinx-doc.org/>`_.)
 
 
 ``python -m ansicolortags --help``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This command shows the help of the script, colored with the tools defined in the script :
+This command shows the help of the script, colored with the tools defined in the script:
 
-.. image:: examples/example1.png
+.. image:: examples/help.png
    :scale: 85 %
    :align: center
    :alt:   The help message of the script.
@@ -47,12 +47,46 @@ This command shows the help of the script, colored with the tools defined in the
 ``python -m ansicolortags --test``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This command shows a complete test of all tags defined in the module :
+This command shows a complete test of all tags defined in the module:
 
-.. image:: examples/example2.png
+.. image:: examples/test_python2_7__1.png
    :scale: 85 %
    :align: center
-   :alt:   The canonical test of the script.
+   :alt:   The canonical test of the script (1/2).
+
+.. image:: examples/test_python2_7__2.png
+   :scale: 85 %
+   :align: center
+   :alt:   The canonical test of the script (2/2).
+
+
+``--ANSI`` or ``--noANSI`` option
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can force to use ANSI codes (even if they appear to not be supported be the output, e.g. a pipe) with the ``--ANSI`` flag option,
+or force to disable them with the ``--noANSI`` flag option:
+
+.. image:: examples/ANSI__option.png
+   :scale: 85 %
+   :align: center
+   :alt:   Test of the --ANSI flag option.
+
+.. image:: examples/noANSI__option.png
+   :scale: 85 %
+   :align: center
+   :alt:   Test of the --noANSI flag option.
+
+
+``python -m ansicolortags --generate``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This command can be used to generate `a .color.sh file <https://bitbucket.org/lbesson/bin/src/master/.color.sh>`_, to be used in any GNU Bash script:
+
+.. image:: examples/generate__option.png
+   :scale: 85 %
+   :align: center
+   :alt:   The --generate option of the script.
+
 
 Complete documentation
 ----------------------

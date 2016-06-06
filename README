@@ -5,7 +5,7 @@ ansicolortags
 
 ![Documentation on ansicolortags.readthedocs.io](https://readthedocs.org/projects/ansicolortags/badge/?version=latest "Documentation on ansicolortags.readthedocs.io")
 
-![Screenshot of the doc, colored with the script](examples/example1.png "Screenshot of the doc, colored with the script")
+![Screenshot of the doc, colored with the script](examples/help.png "Screenshot of the doc, colored with the script")
 
 ----
 

@@ -660,7 +660,7 @@ def _generate_color_sh(file_name=None):
         mfile = sys.stdout
     mfile.write("""#!/bin/sh
 #
-# From ansicolortags.py module, auto generated with -g option
+# From ansicolortags.py module, auto generated with the --generate command
 # More information on https://bitbucket.org/lbesson/ansicolortags.py/
 #
 # About the convention for the names of the colors :
@@ -675,20 +675,20 @@ def _generate_color_sh(file_name=None):
 #
 # About
 # =====
-#   Use this script with other GNU Bash scripts, simply by importing him with
-#    $ . ~/.color.sh
+# Use this file .color.sh in other GNU Bash scripts, simply by sourcing him with
+# $ source ~/.color.sh
 #
 # Copyrigth
 # =========
 # (C) Lilian Besson, 2012-2016.
 #
-# List of colors:
-# ===============
-    """)
+# List of colors
+# ==============
+""")
     res = ""
     for s in colorList:
         exec("res = ('%%s' %% %s)" % s.replace('\x1b', '\\\\x1b'))  # Bad to use exec !
-        #: unescaping special characters.
+        # Unescaping special characters.
         res = res.replace('\x1b', '\\033').replace('\r', '\\r')
         mfile.write("export %s=\"%s\"\n" % (s, (r"%s" % res)))
         # FIXED the r"%s" above is important
@@ -721,6 +721,9 @@ if __name__ == '__main__':
     myparser = _parser_default(
         description='<green>ANSI Colors utility <red>module<reset> and <blue>script<reset> (ansicolortags.py).',
         epilogue="""
+Use this file <u>~/.color.sh<U> with other GNU Bash scripts, simply by sourcing him with:
+<b><black>source ~/.color.sh<reset>  # in a GNU Bash script
+
 <b>About the <u>convention<U> for the names of the colors:<reset>
 - for the eight colors black, red, green, yellow, blue, magenta, cyan, white:
   + the name in minuscule is for color **with bold** (example <yellow>'yellow'<reset>),
@@ -731,26 +734,25 @@ if __name__ == '__main__':
   + the name starting in capital letter is to <u>**turn down**<reset> the effect (example 'U' to stop underline);
 - for the other special effects (nocolors, default, Default, clear, el), the effect is <u>**immediate**<reset> (and seems to be well supported).
 
-Use this script with other GNU Bash scripts, simply by importing him with
-<b><black> . ~/.color.sh<reset>
-
 <yellow>About
 =====<reset>
 This project can be found <green>on-line<reset>:
  - here on <neg>BitBucket<Neg> : <u>https://bitbucket.org/lbesson/ansicolortags.py<U>,
  - here on <neg>PyPi<Neg> : <u>https://pypi.python.org/pypi/ansicolortags<U>,
- - and his documentation can be found here on <neg>Read the Docs<Neg> : <u>http://ansicolortags.readthedocs.io/<U>.
+ - and its documentation can be found here on <neg>Read the Docs<Neg> : <u>http://ansicolortags.readthedocs.io/<U>.
 
-The reference page for ANSI code is : <u>http://en.wikipedia.org/wiki/ANSI_escape_code<U>.\n""",
+The reference page for ANSI code is : <u>https://en.wikipedia.org/wiki/ANSI_escape_code<U>.\n""",
         version=__version__, preprocessor=mypreprocessor)
+
     #: So, here become the interesting part.
     group = myparser.add_mutually_exclusive_group()
     group.add_argument("-t", "--test", help="Launch a complete test of all ANSI Colors code defined here.", action="store_true")
+
     #: Description for the part with '--file' and '--generate' options.
     group = myparser.add_argument_group('Generation of a GNU Bash color aliases file')
     # Add lats two options
     group.add_argument("-g", "--generate", help="Print all ANSI Colors as 'export name = value'.", action="store_true")  # , required = True)
-    group.add_argument("-f", "--file", help="If present, and with --generate option, don't print the values, but export them in the file FILE.", default=None)
+    group.add_argument("-f", "--file", help="If present, and with --generate option, don't print the values, but export them in the file FILE (e.g. FILE = ~/.color.sh)", default=None)
 
     #: The parser is done.
     #: Use it to extract the args from the command line.
