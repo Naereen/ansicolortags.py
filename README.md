@@ -15,7 +15,7 @@ ansicolortags
 ### Language?
 Python v2.7+ or Python v3.2+.
 
-This project is hosted on [the Pypi package repository](<https://pypi.python.org/pypi/ANSIColors-balises> "Pypi !").
+This project is hosted on [the Pypi package repository](<https://pypi.python.org/pypi/ansicolortag> "Pypi !").
 
 Documentation
 -------------

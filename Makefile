@@ -174,17 +174,17 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/ANSIColors-balises.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/ansicolortags.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/ANSIColors-balises.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/ansicolortags.qhc"
 
 devhelp:
 	$(SPHINXBUILD) -b devhelp $(ALLSPHINXOPTS) $(BUILDDIR)/devhelp
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/ANSIColors-balises"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/ANSIColors-balises"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/ansicolortags"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/ansicolortags"
 	@echo "# devhelp"
 
 epub:

@@ -2,7 +2,7 @@
 # -*- encoding: utf-8 -*-
 """
 An efficient and simple ANSI colors module (and also a powerful script), with functions to print text using colors.
-https://bitbucket.org/lbesson/ansicolors.py
+https://bitbucket.org/lbesson/ansicolortags.py
 
 
 The names of the colors follow these conventions:
@@ -111,8 +111,8 @@ About
 
 This project can be found on-line:
 
-* `here on BitBucket <https://bitbucket.org/lbesson/ansicolors.py>`_;
-* `here on PyPi <https://pypi.python.org/pypi/ansicolors>`_.
+* `here on BitBucket <https://bitbucket.org/lbesson/ansicolortags.py>`_;
+* `here on PyPi <https://pypi.python.org/pypi/ansicolortags>`_.
 
 
 * The reference page for ANSI code is : `here on Wikipedia <https://en.wikipedia.org/wiki/ANSI_escape_code>`_.
@@ -177,8 +177,8 @@ warning, question, WARNING, INFO, ERROR:
 """
 
 __author__ = 'Lilian Besson'
-__version__ = '0.1'
-__date__ = '2016-06-05T22:27:50+02:00'
+__version__ = '0.2'
+__date__ = '2016-06-06T10:40:41+02:00'
 
 # %% Usual Modules
 # Should we make them hidden from the interface of the script. Idea : remove from __all__ ?
@@ -685,6 +685,7 @@ def _generate_color_sh(file_name=None):
 # List of colors
 # ==============
 """)
+    # FIXME it appears to be failing on Python 3
     res = ""
     for s in colorList:
         exec("res = ('%%s' %% %s)" % s.replace('\x1b', '\\\\x1b'))  # Bad to use exec !

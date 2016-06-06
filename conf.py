@@ -259,7 +259,7 @@ latex_show_pagerefs = True
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'ansicolors-balises', u'ansicolortags Documentation',
+    ('index', 'ansicolortags', u'ansicolortags Documentation',
      [u'Lilian Besson'], 1)
 ]
 
