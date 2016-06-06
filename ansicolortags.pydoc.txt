@@ -216,12 +216,12 @@ FUNCTIONS
         
          This function is used in all the following, so all other function can also use ``left`` and ``right`` arguments.
     
-    tocolor(string)
-        tocolor(string) -> string
+    tocolor(mystring)
+        tocolor(mystring) -> string
         
         Convert a string to a color.
-        ``string`` **have** to be in :py:data:`colorList` to be recognized (and interpreted).
-        Default value if ``string`` is not one of the color name is ``""`` the empty string.
+        ``mystring`` **have** to be in :py:data:`colorList` to be recognized (and interpreted).
+        Default value if ``mystring`` is not one of the color name is ``""`` the empty string.
     
     writec(chainWithTags='', out=<open file '<stdout>', mode 'w'>, left='<', right='>', flush=True)
         writec(chainWithTags="", out=sys.stdout, left='<', right='>', flush=True) -> unit
@@ -317,6 +317,7 @@ DATA
     blink = ''
     blue = ''
     clear = ''
+    colorDict = {'B': '\x1b[2m', 'Bblack': '\x1b[02;30m', 'Bblue': '\x1b[0...
     colorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cy...
     cyan = ''
     default = ''

@@ -2,11 +2,11 @@ git-complete-stats.sh: do statistics on this git repository.
   From https://github.com/esc/git-stats/
 
 Number of commits per author:
-     9	Lilian Besson
+    14	Lilian Besson
 
 ----------------------
 Statistics for: Lilian
-  - Number of files changed: 28
-  - Number of lines added: 3072
-  - Number of lines deleted: 634
+  - Number of files changed: 31
+  - Number of lines added: 3350
+  - Number of lines deleted: 682
   - Number of merges: 0
