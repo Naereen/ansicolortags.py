@@ -443,7 +443,7 @@ def sprint(chainWithTags, left='<', right='>', verbose=False):
 
 
 def erase(chainWithTags, left='<', right='>', verbose=False):
-    """ erase(chainWithTags, left = '<', right = '>', verbose = False) -> string
+    """ erase(chainWithTags, left='<', right='>', verbose=False) -> string
 
     Parse a string containing color tags, when color is one of the previous define name,
     and then return it, with color tags **erased**.
@@ -483,7 +483,7 @@ def erase(chainWithTags, left='<', right='>', verbose=False):
 
 
 def printc(chainWithTags, left='<', right='>'):
-    """ printc(chainWithTags, left = '<', right = '>') -> unit
+    """ printc(chainWithTags, left='<', right='>') -> unit
 
     A shortcut to ``print(sprint(chainWithTags))`` : analyze all tags, and print the result.
     """
