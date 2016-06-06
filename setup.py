@@ -32,7 +32,7 @@ Foregrounds
 
 You can choose one of the 8 basic ANSI colours: black, red, green, yellow, blue,
 magenta, cyan, white.
-The names beginning with a *lowerscript* design **foreground** colours.
+The names beginning with a *lower-script* design **foreground** colours.
 
 For example: ::
 
@@ -44,13 +44,13 @@ Backgrounds
 
 You can choose one of the 8 basic ANSI colours: Black, Red, Green, Yellow, Blue,
 Magenta, Cyan, White.
-The names beginning with a *upperscript* design **background** colors.
+The names beginning with an *upper-script* design **background** colors.
 
 For example: ::
 
 
     from ansicolortags import printc
-    ansicolortags.printc('<Default>this is default. <Blue>this have a blue background<Black> and black in background now<reset>').
+    printc('<Default>this is default. <Blue>this have a blue background<Black> and black in background now<reset>').
 
 Other tags
 ----------
@@ -132,8 +132,8 @@ This module is licensed under the term of the **MIT License**, see the file *LIC
 """,
       author='Lilian Besson',
       author_email='naereen@crans.org',
-      url='https://bitbucket.org/lbesson/ansicolortags',
-      download_url='https://bitbucket.org/lbesson/ansicolortags',
+      url='https://bitbucket.org/lbesson/ansicolortags.py/',
+      download_url='https://bitbucket.org/lbesson/ansicolortags.py/',
       license='MIT',
       platforms=['Windows', 'Windows Cygwin', 'GNU/Linux', 'MacOS'],
       classifiers=[

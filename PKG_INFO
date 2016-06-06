@@ -2,11 +2,11 @@ Metadata-Version: 1.1
 Name: ansicolortags
 Version: 0.1
 Summary: ansicolortags brings a simple and powerful way to use colours in a terminal application with Python 2 and 3.
-Home-page: https://bitbucket.org/lbesson/ansicolortags
+Home-page: https://bitbucket.org/lbesson/ansicolortags.py/
 Author: Lilian Besson
 Author-email: naereen@crans.org
 License: MIT
-Download-URL: https://bitbucket.org/lbesson/ansicolortags
+Download-URL: https://bitbucket.org/lbesson/ansicolortags.py/
 Description: 
         The ``ansicolortags`` module provides efficient and useful functions to use colours in a terminal application with Python 2 and 3, with a *HTML-tag* like style : ``<red>text<white>`` will print ``text`` in red.
         
@@ -25,7 +25,7 @@ Description:
         
         You can choose one of the 8 basic ANSI colours: black, red, green, yellow, blue,
         magenta, cyan, white.
-        The names beginning with a *lowerscript* design **foreground** colours.
+        The names beginning with a *lower-script* design **foreground** colours.
         
         For example: ::
         
@@ -37,13 +37,13 @@ Description:
         
         You can choose one of the 8 basic ANSI colours: Black, Red, Green, Yellow, Blue,
         Magenta, Cyan, White.
-        The names beginning with a *upperscript* design **background** colors.
+        The names beginning with an *upper-script* design **background** colors.
         
         For example: ::
         
         
             from ansicolortags import printc
-            ansicolortags.printc('<Default>this is default. <Blue>this have a blue background<Black> and black in background now<reset>').
+            printc('<Default>this is default. <Blue>this have a blue background<Black> and black in background now<reset>').
         
         Other tags
         ----------
