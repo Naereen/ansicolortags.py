@@ -34,7 +34,7 @@ DESCRIPTION
     -----------------
     
     * :py:func:`sprint`: give a string,
-    * :py:func:`printc`: like __builtin__.print, but with interpreting tags to put colors,
+    * :py:func:`printc`: like :py:func:`print`, but with interpreting tags to put colors. **This is the most useful function in this module !**
     * :py:func:`writec`: like printc, but using any file object (and no new line added at the end of the string).
     
     To clean the terminal or the line
@@ -152,7 +152,7 @@ FUNCTIONS
         Try to clear the screen using ANSI code :py:data:`clear`.
     
     erase(chainWithTags, left='<', right='>', verbose=False)
-        erase(chainWithTags, left = '<', right = '>', verbose = False) -> string
+        erase(chainWithTags, left='<', right='>', verbose=False) -> string
         
         Parse a string containing color tags, when color is one of the previous define name,
         and then return it, with color tags **erased**.
@@ -178,10 +178,32 @@ FUNCTIONS
         - Return True if and only if the title have been correctly changed.
         - Fails simply if ``notify-send`` is not found.
     
-    printc(chainWithTags, left='<', right='>')
-        printc(chainWithTags, left = '<', right = '>') -> unit
+    printc(chainWithTags, left='<', right='>', **kw)
+        printc(chainWithTags, left='<', right='>', **kw) -> unit
         
-        A shortcut to ``print(sprint(chainWithTags))`` : analyze all tags, and print the result.
+            A shortcut to ``print(sprint(chainWithTags))`` : analyze all tags (convert the tags like ``<red>`` to their ANSI code value, like :py:data:`red`), and print the result.
+        
+            This is the more useful function in this package.
+        
+            .. hint::
+        
+               I suggest to use `ansicolortags.py <https://pypi.python.org/pypi/ansicolortags>`_ in your own project with the following piece of code: ::
+        
+               try:
+                   from ansicolortags import printc
+               except ImportError:
+                   print("WARNING: ansicolortags was not found, disabling colors instead.
+        Please install it with 'pip install ansicolortags'")
+                   def printc(*a, **kw):
+                       print(*a, **kw)
+        
+            .. hint::
+        
+               During the last 4 years, `a lot of the small Python scripts I wrote <https://bitbucket.org/lbesson/bin/src/master/>`_ try to use this module to add some colors:
+               for example, `FreeSMS.py <https://bitbucket.org/lbesson/bin/src/master/FreeSMS.py>`_,
+               `plotnotes.py <https://bitbucket.org/lbesson/bin/src/master/plotnotes.py>`_,
+               `strapdown2html.py <https://bitbucket.org/lbesson/bin/src/master/strapdown2html.py>`_,
+               `calc_interets.py <https://bitbucket.org/lbesson/bin/src/master/calc_interets.py>`_...
     
     sleep(...)
         sleep(seconds)
@@ -220,7 +242,7 @@ FUNCTIONS
         tocolor(mystring) -> string
         
         Convert a string to a color.
-        ``mystring`` **have** to be in :py:data:`colorList` to be recognized (and interpreted).
+        ``mystring`` **have** to be in :py:data:`colorDict` to be recognized (and interpreted).
         Default value if ``mystring`` is not one of the color name is ``""`` the empty string.
     
     writec(chainWithTags='', out=<open file '<stdout>', mode 'w'>, left='<', right='>', flush=True)
@@ -282,68 +304,69 @@ FUNCTIONS
 
 DATA
     ANSISupported = False
-    B = ''
-    Bblack = ''
-    Bblue = ''
-    Bcyan = ''
-    Bgreen = ''
-    Black = ''
-    Blink = ''
-    Blue = ''
-    Bmagenta = ''
-    Bred = ''
-    Bwhite = ''
-    Byellow = ''
-    Cyan = ''
-    Default = ''
-    ERROR = ''
-    Green = ''
-    INFO = ''
-    Italic = ''
-    Magenta = ''
-    Neg = ''
-    Red = ''
-    U = ''
-    WARNING = ''
-    White = ''
-    Yellow = ''
+    B = '\x1b[2m'
+    Bblack = '\x1b[02;30m'
+    Bblue = '\x1b[02;34m'
+    Bcyan = '\x1b[02;36m'
+    Bgreen = '\x1b[02;32m'
+    Black = '\x1b[40m'
+    Blink = '\x1b[06m'
+    Blue = '\x1b[44m'
+    Bmagenta = '\x1b[02;35m'
+    Bred = '\x1b[02;31m'
+    Bwhite = '\x1b[02;37m'
+    Byellow = '\x1b[02;33m'
+    Cyan = '\x1b[46m'
+    Default = '\x1b[49m'
+    ERROR = '\x1b[0;39;49m\x1b[01;31mERROR\x1b[0;39;49m'
+    Green = '\x1b[42m'
+    INFO = '\x1b[0;39;49m\x1b[01;34mINFO\x1b[0;39;49m'
+    Italic = '\x1b[23m'
+    Magenta = '\x1b[45m'
+    Neg = '\x1b[27m'
+    Red = '\x1b[41m'
+    U = '\x1b[24m'
+    WARNING = '\x1b[0;39;49m\x1b[01;33mWARNING\x1b[0;39;49m'
+    White = '\x1b[47m'
+    Yellow = '\x1b[43m'
     __author__ = 'Lilian Besson'
-    __date__ = '2016-06-06T10:40:41+02:00'
-    __version__ = '0.2'
+    __date__ = '2016-06-07T08:42:25+02:00'
+    __version__ = '0.3'
     absolute_import = _Feature((2, 5, 0, 'alpha', 1), (3, 0, 0, 'alpha', 0...
-    b = ''
-    bell = ''
-    black = ''
-    blink = ''
-    blue = ''
-    clear = ''
-    colorDict = {'B': '\x1b[2m', 'Bblack': '\x1b[02;30m', 'Bblue': '\x1b[0...
+    b = '\x1b[1m'
+    bell = '\x07'
+    black = '\x1b[01;30m'
+    blink = '\x1b[05m'
+    blue = '\x1b[01;34m'
+    clear = '\x1b[2J'
+    colorDict = {'B': '', 'Bblack': '', 'Bblue': '', 'Bcyan': '', 'Bgreen'...
     colorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cy...
-    cyan = ''
-    default = ''
-    el = ''
-    green = ''
-    italic = ''
-    magenta = ''
-    name = 'INFO'
-    neg = ''
-    nocolors = ''
+    cyan = '\x1b[01;36m'
+    default = '\x1b[39m'
+    documentation_list_of_colors = "\nList of all colors\n================...
+    el = '\r\x1b[K'
+    green = '\x1b[01;32m'
+    italic = '\x1b[3m'
+    key = 'Bblue'
+    magenta = '\x1b[01;35m'
+    neg = '\x1b[7m'
+    nocolors = '\x1b[0m'
     print_function = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0)...
-    question = ''
-    red = ''
-    reset = ''
+    question = '\x1b[01;33m\x1b[4m/?\\\x1b[24m\x1b[0;39;49m'
+    red = '\x1b[01;31m'
+    reset = '\x1b[0;39;49m'
     simpleColorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta...
-    title = ''
-    u = ''
-    warning = ''
-    white = ''
-    yellow = ''
+    title = '\x1b]0;'
+    u = '\x1b[4m'
+    warning = '\x1b[01;31m\x1b[4m/!\\\x1b[24m\x1b[0;39;49m'
+    white = '\x1b[01;37m'
+    yellow = '\x1b[01;33m'
 
 VERSION
-    0.2
+    0.3
 
 DATE
-    2016-06-06T10:40:41+02:00
+    2016-06-07T08:42:25+02:00
 
 AUTHOR
     Lilian Besson

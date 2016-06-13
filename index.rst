@@ -2,7 +2,14 @@
 Welcome to ansicolortags's documentation!
 =========================================
 
-Welcome to the documentation for ``ansicolortags``, a Python 2 or 3 module to use ANSI colors in a terminal.
+Welcome to the documentation for ``ansicolortags``, a Python 2 or 3 module to use ANSI colors in a terminal application from Python.
+
+The ``ansicolortags`` module provides an efficient and useful function (:py:func:`printc`) to print colored text in a terminal application with Python 2 and 3, with a *HTML-tag* like style: ::
+
+    >>> from ansicolortags import printc  # Import the function
+    >>> printc("I like my sky to be <blue>blue<reset>, not <black>dark<reset> !")
+    I like my sky to be blue, not dark !
+
 
 - This project is open-source `here on BitBucket <https://bitbucket.org/lbesson/ansicolortags.py>`_.
 
@@ -18,11 +25,12 @@ Welcome to the documentation for ``ansicolortags``, a Python 2 or 3 module to us
 Examples
 --------
 
-The function ``printc``
-~~~~~~~~~~~~~~~~~~~~~~~
+The function :py:func:`ansicolortags.printc`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The main function of this module is ``printc``, e.g. ``printc("my string")``
-This function works exactly like ``print("my string")``.
+The main function of this module is ``printc`` (:py:func:`ansicolortags.printc`),
+for example use it like ``printc("my string with color tags")``.
+This function works *exactly* like ``print("my string with color tags")``.
 
 
 For instance, a quick description of super hero's costumes can be done like this: ::
@@ -32,6 +40,31 @@ For instance, a quick description of super hero's costumes can be done like this
 
 (Sorry, but it is hard to embed colors in the output of a Python command in a `Sphinx generated web-pages <http://sphinx-doc.org/>`_.)
 
+
+Another example, it will print the text *"France flag is blue, white and red !"* with appropriate colors: ::
+
+    >>> from ansicolortags import printc  # Import the function
+    >>> printc("France flag is <blue>blue<reset>, <white>white<reset>, and <red>red<reset> !")
+    France flag is blue, white and red !
+
+
+The function :py:func:`printc` should be imported from :py:mod:`ansicolortags` (:py:func:`ansicolortags.printc`).
+
+Note that other useful functions are defined:
+:py:func:`ansicolortags.writec` to write to a file,
+:py:func:`ansicolortags.xtitle` to change the title of the terminal,
+:py:func:`ansicolortags.sprint` to convert all the tags (e.g., ``<red>``) in a string to their ANSI Code value (e.g., ``\033[01;31m``), etc.
+
+------------------------------------------------------------------------------
+
+The script ``ansicolortags.py``
+-------------------------------
+
+But the project also installs a script, ``ansicolortags.py``, which can be executed directly,
+or called with ``python -m ansicolortags`` after installation.
+
+The script itself does not have a useful purpose, except for testing and demonstrating the capabilities of this project.
+If needed: :download:`ansicolortags.py`.
 
 ``python -m ansicolortags --help``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,16 +121,17 @@ This command can be used to generate `a .color.sh file <https://bitbucket.org/lb
    :alt:   The --generate option of the script.
 
 
+------------------------------------------------------------------------------
+
 Complete documentation
 ----------------------
 
-And, a detailed description of every function is available
-on the documentation `of the module ansicolortags <ansicolortags.html>`_.
+And, a detailed description of every functions and every constants of the :py:mod:`ansicolortags` module
+is available on the documentation `of the module ansicolortags <ansicolortags.html>`_
+(automatically generated from the docstrings in the file).
 
------------------------------------------------------------------------------
-
-Author
-------
+Contact the author if needed?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hi, I am Lilian Besson, a French student at ÉNS de Cachan, in Mathematics and computer science (CS).
 
@@ -120,7 +154,7 @@ Index and tables
 * :ref:`search`
 
 Table of contents
------------------
+~~~~~~~~~~~~~~~~~
 
 .. toctree::
    :maxdepth: 5
@@ -143,13 +177,13 @@ Last update of this doc was made |today|.
 .. _licence:
 
 The MIT License (MIT)
----------------------
+~~~~~~~~~~~~~~~~~~~~~
 .. include:: LICENSE
 
 ------------------------------------------------------------------------------
 
 Cloud of words
---------------
+~~~~~~~~~~~~~~
 
 .. image:: cloudwords.png
 

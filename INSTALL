@@ -1,10 +1,15 @@
 Installation
 ------------
+TL;DR: install this module and script in one command with `pip <http://pip.readthedocs.io/>`_: ::
+
+    pip install ansicolortags
+
 
 Dependencies
 ~~~~~~~~~~~~
 
 The project is entirely written in pure Python, supporting both version 2 (2.7+) and version 3 (3.1+).
+It has **no dependencies** except a Python interpreter!
 For more details about the Python language, see `its official website <https://www.python.org/>`_.
 
 How to install it ?
@@ -14,27 +19,41 @@ There is three different ways:
 1. Directly, with pip
 ^^^^^^^^^^^^^^^^^^^^^
 The preferred way is to install ``ansicolortags``
-directly with ``pip`` (`what is pip? <http://pip.readthedocs.io/>`_): ::
+directly with ``pip`` (`what is pip? <http://pip.readthedocs.io/>`_):
 
-    pip install ansicolortags
+.. code:: bash
 
-On GNU/Linux, it might be necessary to give it sudo rights: ::
+    $ pip install ansicolortags
 
-    sudo pip install ansicolortags
+On GNU/Linux, it might be necessary to give it *sudo rights*:
+
+.. code:: bash
+
+    $ sudo pip install ansicolortags
 
 
-2. Download, extract, and use setup.py
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+If you have both Python 2 and 3, and if you want to use the module *from both*,
+be sure to install it *with both* ``pip2`` and ``pip3`` :
 
-Or you can also :
+.. code:: bash
 
- 1. download the file, `from PyPi <https://pypi.python.org/pypi/ansicolortags>`_;
+    $ sudo pip2 install ansicolortags  # For Python 2 (v2.7+)
+    $ sudo pip3 install ansicolortags  # For Pythoh 3 (v3.1+)
+
+
+
+2. Download, extract, and use ``setup.py``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Or you can also follow these 4 steps:
+
+ 1. download the file `ansicolortags.tar.gz <https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.3.tar.gz>`_ from Bitbucket, or `from PyPi <https://pypi.python.org/pypi/ansicolortags>`_ (if needed, it is `signed numerically <https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.3.tar.gz.asc>`_ with `my PGP key <http://perso.crans.org/besson/Lilian_Besson.asc>`_);
 
  2. extract it (with :code:`tar xzfv`, or a graphical solution, like File Roller);
 
- 3. then go in the subdirectory (:code:`cd ansicolortags-v0.2/`);
+ 3. then go in the subdirectory (:code:`cd ansicolortags-0.3/`);
 
- 4. and finally with Python distutils setup tool:
+ 4. and finally install it with Python distutils ``setup.py`` tool:
 
     .. code:: bash
 
@@ -46,9 +65,11 @@ Or you can also :
 
        $ sudo python setup.py install
 
+   For more information, run ``python setup.py help`` or ``python setup.py install help``.
 
-3. Without installing it
-^^^^^^^^^^^^^^^^^^^^^^^^
+
+3. *Without installing it*
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Note that installation *is not mandatory* :
 a third solution is to simply include JUST the file ``ansicolortags.py``,

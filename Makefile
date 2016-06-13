@@ -69,11 +69,11 @@ notify_archive:	archive
 cleanAll: clean_build clean_pyc
 
 pylint3k:
-	pylint --py3k ansicolortags.py | less
+	pylint --py3k ansicolortags.py
 
 pylint:
-	pylint -d broad-except,exec-used ansicolortags.py > ansicolortags.pylint.txt
-	pylint -d broad-except,exec-used ansicolortags.py | less
+	-pylint -d broad-except ansicolortags.py > ansicolortags.pylint.txt
+	pylint -d broad-except ansicolortags.py | less
 
 pydoctxt:
 	pydoc ansicolortags > ansicolortags.pydoc.txt

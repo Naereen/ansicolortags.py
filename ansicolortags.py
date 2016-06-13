@@ -28,7 +28,7 @@ To print a string
 -----------------
 
 * :py:func:`sprint`: give a string,
-* :py:func:`printc`: like __builtin__.print, but with interpreting tags to put colors,
+* :py:func:`printc`: like :py:func:`print`, but with interpreting tags to put colors. **This is the most useful function in this module !**
 * :py:func:`writec`: like printc, but using any file object (and no new line added at the end of the string).
 
 To clean the terminal or the line
@@ -51,6 +51,8 @@ Example of use (module)
 To store a string, use :py:func:`sprint` (i.e. print to a string, *sprint*), like this: ::
 
     >>> example = sprint("France flag is <blue>blue<white>white<red>red<white>, Italy flag have <green>green on it<white>.")
+    >>> example
+    'France flag is \x1b[01;34mblue\x1b[01;37mwhite\x1b[01;31mred\x1b[01;37m, Italy flag have \x1b[01;32mgreen on it\x1b[01;37m.'
 
 
 The string ``example`` can then be printed, with colors, with: ::
@@ -59,9 +61,10 @@ The string ``example`` can then be printed, with colors, with: ::
     France flag is bluewhitered, Italy flag have green on it.
 
 
-To directly print a string colored by tags, use :py:func:`printc`: ::
+To directly print a string colored by tags, use :py:func:`printc` (colors will be there if you try this in your terminal): ::
 
     >>> printc("Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>.")
+    Batman's costum is black, Aquaman's costume is blue and green.
 
 
 .. seealso::
@@ -69,13 +72,13 @@ To directly print a string colored by tags, use :py:func:`printc`: ::
    This is the most useful function. To do the same, but on any file, use :py:func:`writec`.
 
 
-Moreover, the function :py:func:`erase` can also be useful to simply delete all *valid* color tags ::
+Moreover, the function :py:func:`erase` can also be useful to simply delete all *valid* color tags: ::
 
     >>> print(erase("Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>, and this is a non-valid <tag>, so it is kept like this."))
     Batman's costum is black, Aquaman's costum is blue and green, and this is a non-valid <tag>, so it is kept like this
 
 
-In this last example, an ``<el>`` tag (:py:data:`el`) is used to erase the current content of the line, useful to make a *dynamical* print ::
+In this last example, an ``<el>`` tag (:py:data:`el`) is used to erase the current content of the line, useful to make a *dynamical* print: ::
 
    >>> writec("<red>Computing <u>len(str(2**562016))<reset>...."); tmp = len(str(2**562016)); writec("<el><green>Done !<reset>")
    Done !
@@ -106,28 +109,30 @@ And, the module part behaves exactly like the script part.
 
 ------------------------------------------------------------------------------
 
-About
-=====
+Elsewhere online
+================
 
 This project can be found on-line:
 
-* `here on BitBucket <https://bitbucket.org/lbesson/ansicolortags.py>`_;
-* `here on PyPi <https://pypi.python.org/pypi/ansicolortags>`_.
+* here on BitBucket: `<https://bitbucket.org/lbesson/ansicolortags.py>`_
+* here on PyPi: `<https://pypi.python.org/pypi/ansicolortags>`_
 
+
+And some documentation on ANSI codes:
 
 * The reference page for ANSI code is : `here on Wikipedia <https://en.wikipedia.org/wiki/ANSI_escape_code>`_.
-* The reference page for XTitle escape code is : `here <http://www.faqs.org/docs/Linux-mini/Xterm-Title.html>`_.
-
-Complete documentation
-======================
-
-The doc is available on-line, on `Read the Docs <https://www.readthedocs.org/>`_ :
-`<http://ansicolortags.readthedocs.io/>`_ !
+* A reference page for XTitle escape code is : `here <http://www.faqs.org/docs/Linux-mini/Xterm-Title.html>`_.
 
 Copyrigth
 =========
 
 © Lilian Besson, 2012-2016.
+
+Complete documentation
+======================
+
+.. note:: The doc is available on-line, on `Read the Docs <https://www.readthedocs.org/>`_: `<http://ansicolortags.readthedocs.io/>`_.
+
 """
 
 from __future__ import print_function
@@ -136,7 +141,7 @@ from __future__ import absolute_import
 
 # %% Program part
 
-"""
+documentation_list_of_colors = """
 List of all colors
 ==================
 
@@ -177,8 +182,8 @@ warning, question, WARNING, INFO, ERROR:
 """
 
 __author__ = 'Lilian Besson'
-__version__ = '0.2'
-__date__ = '2016-06-06T10:40:41+02:00'
+__version__ = '0.3'
+__date__ = '2016-06-07T08:42:25+02:00'
 
 # %% Usual Modules
 # Should we make them hidden from the interface of the script. Idea : remove from __all__ ?
@@ -349,36 +354,90 @@ WARNING = "%s%sWARNING%s" % (reset, yellow, reset)    #: A well colored WARNING 
 INFO = "%s%sINFO%s" % (reset, blue, reset)    #: A well colored INFO word, in :blue:`blue`.
 
 
-#: List of all authorized colors.
+#: List of all authorized colors. The dictionary :py:data:`colorDict` is more used.
 colorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'Bblack', 'Bred', 'Bgreen', 'Byellow', 'Bblue', 'Bmagenta', 'Bcyan', 'Bwhite', 'Black', 'Red', 'Green', 'Yellow', 'Blue', 'Magenta', 'Cyan', 'White', 'Blink', 'blink', 'nocolors', 'default', 'Default', 'italic', 'Italic', 'b', 'B', 'u', 'U', 'neg', 'Neg', 'clear', 'el', 'reset', 'bell', 'title', 'warning', 'question', 'ERROR', 'WARNING', 'INFO']
 #: List of all simple colors.
 simpleColorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
 
-colorDict = dict()
+# # Backup all colors.
+# for name in colorList:
+#     exec('_%s = %s' % (name, name))  # Bad to use exec !
+#     # exec('colorDict["%s"] = %s' % (name, name))
 
-# Backup all colors.
-for name in colorList:
-    exec('_%s = %s' % (name, name))  # Bad to use exec !
-    exec('colorDict["%s"] = %s' % (name, name))  # Bad to use exec !
+# FIXED I could avoid this exec by building the colorDict manually
+#: The key element of my script... A dictionary mapping color names to ANSI color code. Used in :py:func:`tocolor`.
+colorDict = {
+    'black': black,
+    'red': red,
+    'green': green,
+    'yellow': yellow,
+    'blue': blue,
+    'magenta': magenta,
+    'cyan': cyan,
+    'white': white,
+    'Bblack': Bblack,
+    'Bred': Bred,
+    'Bgreen': Bgreen,
+    'Byellow': Byellow,
+    'Bblue': Bblue,
+    'Bmagenta': Bmagenta,
+    'Bcyan': Bcyan,
+    'Bwhite': Bwhite,
+    'Black': Black,
+    'Red': Red,
+    'Green': Green,
+    'Yellow': Yellow,
+    'Blue': Blue,
+    'Magenta': Magenta,
+    'Cyan': Cyan,
+    'White': White,
+    'Blink': Blink,
+    'blink': blink,
+    'nocolors': nocolors,
+    'default': default,
+    'Default': Default,
+    'italic': italic,
+    'Italic': Italic,
+    'b': b,
+    'B': B,
+    'u': u,
+    'U': U,
+    'neg': neg,
+    'Neg': Neg,
+    'clear': clear,
+    'el': el,
+    'reset': reset,
+    'bell': bell,
+    'title': title,
+    'warning': warning,
+    'question': question,
+    'ERROR': ERROR,
+    'WARNING': WARNING,
+    'INFO': INFO
+}
+
 
 # Turn off color tags interpretation if they are not supported
 if not ANSISupported:
+    # for name in colorList:
+    #     exec('%s = \"\"' % name)  # Bad to use exec !
     # print("DEBUG: removing colors!")
-    for name in colorList:
-        exec('%s = \"\"' % name)  # Bad to use exec !
+    for key in colorDict:
+        colorDict[key] = ''
 
-# print("DEBUG: colorList =", colorList)
+# print("DEBUG: colorDict =", colorDict)
 
 
 def tocolor(mystring):
     """ tocolor(mystring) -> string
 
     Convert a string to a color.
-    ``mystring`` **have** to be in :py:data:`colorList` to be recognized (and interpreted).
+    ``mystring`` **have** to be in :py:data:`colorDict` to be recognized (and interpreted).
     Default value if ``mystring`` is not one of the color name is ``""`` the empty string.
     """
     res = ""
-    if mystring in colorList:
+    # if mystring in colorList:
+    if mystring in colorDict:
         # print("DEBUG: Calling exec('res = %s' % {})".format(mystring))  # Bad to use exec !
         # exec("res = %s" % mystring)  # Bad to use exec !
         res = colorDict[mystring]
@@ -406,13 +465,14 @@ def sprint(chainWithTags, left='<', right='>', verbose=False):
        I know, it's not perfect.
        But, the syntax of color tags is so simple and so beautiful with this limitation that you will surely forgive me this, *won't you* ;) ?
 
-    Example: ::
+
+    Example (where unknown tags are left unmodified, and the colors should be there): ::
 
         >>> print(sprint("<blue>This is blue.<white> And <this> is white.<red> Now this is red because I am <angry> !<green><white>"))
         This is blue. And <this> is white. Now this is red because I am <angry> !
 
 
-     This function is used in all the following, so all other function can also use ``left`` and ``right`` arguments.
+    This function is used in all the following, so all other function can also use ``left`` and ``right`` arguments.
     """
     # TODO improve efficiency of this core algorithm?
     ls = chainWithTags.split(left)
@@ -482,12 +542,36 @@ def erase(chainWithTags, left='<', right='>', verbose=False):
     return res
 
 
-def printc(chainWithTags, left='<', right='>'):
-    """ printc(chainWithTags, left='<', right='>') -> unit
+def printc(chainWithTags, left='<', right='>', **kw):
+    """ printc(chainWithTags, left='<', right='>', **kw) -> unit
 
-    A shortcut to ``print(sprint(chainWithTags))`` : analyze all tags, and print the result.
+    A shortcut to ``print(sprint(chainWithTags))`` : analyze all tags (convert the tags like ``<red>`` to their ANSI code value, like :py:data:`red`), and print the result.
+
+    This is the more useful function in this package.
+
+    .. hint::
+
+       I suggest to use `ansicolortags.py <https://pypi.python.org/pypi/ansicolortags>`_ in your own project with the following piece of code:
+
+       .. code:: python
+
+           try:
+               from ansicolortags import printc
+           except ImportError:
+               print("WARNING: ansicolortags was not found, disabling colors instead.\\nPlease install it with 'pip install ansicolortags'")
+               def printc(*a, **kw):
+                   print(*a, **kw)
+
+
+    .. hint::
+
+       During the last 4 years, `a lot of the small Python scripts I wrote <https://bitbucket.org/lbesson/bin/src/master/>`_ try to use this module to add some colors:
+       for example, `FreeSMS.py <https://bitbucket.org/lbesson/bin/src/master/FreeSMS.py>`_,
+       `plotnotes.py <https://bitbucket.org/lbesson/bin/src/master/plotnotes.py>`_,
+       `strapdown2html.py <https://bitbucket.org/lbesson/bin/src/master/strapdown2html.py>`_,
+       `calc_interets.py <https://bitbucket.org/lbesson/bin/src/master/calc_interets.py>`_...
     """
-    print(sprint(chainWithTags, left=left, right=right))
+    print(sprint(chainWithTags, left=left, right=right), **kw)
 
 
 def writec(chainWithTags="", out=sys.stdout, left='<', right='>', flush=True):
@@ -496,24 +580,24 @@ def writec(chainWithTags="", out=sys.stdout, left='<', right='>', flush=True):
     Useful to print colored text **to a file**, represented by the object ``out``.
     Also useful to print colored text, but without any trailing '\\n' character.
 
-    Example:
-
     In this example, before the long computation begin, it prints 'Computing 2**(2**(2**4)).....',
     and when the computation is done, erases the current line (with ``<el>`` tag, :py:data:`el`),
     and prints ' Done !' in green, and the result of the computation: ::
 
          >>> writec("<red>Computing<reset> 2**(2**(2**4))....."); tmp = 2**(2**(2**4)); writec("<el><green>Done !<reset>")
+         Done !
 
 
     This example show how to use this module to write colored data in a file.
     Be aware that this file now contains ANSI escape sequences.
     For example, :code:`$ cat /tmp/colored-text.txt` will well print the colors, but editing the file will show *hard values* of escape code: ::
 
-        >>> my_file = open('/tmp/colored-text.txt', mode = 'w')  # Opens an random file.
+        >>> my_file = open('/tmp/colored-text.txt', mode = 'w')  # Open an random file.
         >>> write("<blue>this is blue.<white>And <this> is white.<red>Now this is red because I am <angry> !<green><white>", file = my_file)
+        >>> # Now this file '/tmp/colored-text.txt' has some ANSI colored text in it.
 
     Remark:
-    Can also be used to simply reinitialize the ANSI colors buffer, but the function :py:func:`Reset` is here for this: ::
+    It can also be used to simply reinitialize the ANSI colors buffer, but the function :py:func:`Reset` is here for this: ::
 
         >>> writec("<reset>")
 
@@ -536,7 +620,7 @@ def writec(chainWithTags="", out=sys.stdout, left='<', right='>', flush=True):
 def clearScreen():
     """ clearScreen() -> unit
 
-    Try to clear the screen using ANSI code :py:data:`clear`.
+    **Try to** clear the screen using ANSI code :py:data:`clear`.
     """
     writec("<clear>")
 
@@ -544,7 +628,7 @@ def clearScreen():
 def clearLine():
     """ clearLine() -> unit
 
-    Try to clear the current line using ANSI code :py:data:`el`.
+    **Try to** clear the current line using ANSI code :py:data:`el`.
     """
     writec("<el>")
 
@@ -552,7 +636,7 @@ def clearLine():
 def Reset():
     """ Reset() -> unit
 
-    Try to reset the current ANSI codes buffer, using :py:data:`reset`.
+    **Try to** reset the current ANSI codes buffer, using :py:data:`reset`.
     """
     writec("<reset>")
 
@@ -626,33 +710,60 @@ def xtitle(new_title="", verb=False):
 
 # %% Script part
 
-
-# Note: to generate ~/.color.sh with this script, use ./ansicolortags.py -g,
-
 def _generate_color_sh(file_name=None):
-    """ _generate_color_sh(file_name = None) -> string | unit.
+    """ _generate_color_sh(file_name=None) -> string | unit.
 
     Used to print or generate (if file_name is present and is a valid URI address)
-     a profile of all the colors defined in this file.
+    a profile of all the colors defined in this file.
 
     Print all ANSI Colors as :code:`export NAME="VALUE"`.
-    Useful to automatically generate a :code:`~/.color.sh` file, to be used with Bash:
-    use the command :code:`$ ./ansicolortags.py --generate --file ~/.color.sh`,
-    and now you can simply colorized your Bash script with :code:`. ~/.color.sh` to import all colors.
+    Useful to automatically generate a :download:`.color.sh` file, to be used with Bash:
+    and now you can easily colorized your Bash script with :code:`. color.sh` to import all colors.
 
     The file is a list of :code:`export NAME="VALUE"`, to be used with GNU Bash.
+
+
+    .. note::
+
+       For example, to generate the :code:`color.sh` file with this script, use the ``-g`` or ``--generate`` option, with ``-f FILE`` or ``--file FILE``:
+
+       .. code:: bash
+
+          $ python -m ansicolortags -g -f color.sh
+
+    .. hint::
+
+       I suggest to save this :download:`.color.sh` file to your home, like :code:`~/.color.sh`, so it will be available for any GNU Bash script.
+       During the last 4 years, `all the Bash scripts I wrote <https://bitbucket.org/lbesson/bin/src/master/>`_ that uses this color profile (or assume it to be enabled, e.g. from `your .bashrc file <https://bitbucket.org/lbesson/bin/src/master/.bashrc#.bashrc-205>`_) assume it to be saved as :code:`~/.color.sh`.
+
+       For instance,
+       `PDFCompress <https://bitbucket.org/lbesson/bin/src/master/PDFCompress>`_,
+       `git-blame-last-commit.sh <https://bitbucket.org/lbesson/bin/src/master/git-blame-last-commit.sh>`_,
+       `mymake.sh <https://bitbucket.org/lbesson/bin/src/master/mymake.sh>`_,
+       `makequotes.sh <https://bitbucket.org/lbesson/bin/src/master/makequotes.sh>`_,
+       `photosmagic.sh <https://bitbucket.org/lbesson/bin/src/master/photosmagic.sh>`_,
+       `remove_trailing_spaces.sh <https://bitbucket.org/lbesson/bin/src/master/remove_trailing_spaces.sh>`_,
+       `series.sh <https://bitbucket.org/lbesson/bin/src/master/series.sh>`_,
+       `strapdown2pdf.sh <https://bitbucket.org/lbesson/bin/src/master/strapdown2pdf.sh>`_,
+       `Volume.sh <https://bitbucket.org/lbesson/bin/src/master/Volume.sh>`_ etc.
+
+       In a Bash script, I suggest to source this :download:`.color.sh` file like this (it checks if the file exists before sourcing it):
+
+       .. code:: bash
+
+          [ -f ~/.color.sh ] && . ~/.color.sh
     """
     if file_name:
         writec("<green> The file %s is creating.<reset> (C) Lilian Besson, 2012-2016.\t" % file_name)
     writec("<blue><u>Listing of all ANSI colors...<reset>")
-    sleep(0.9)
+    sleep(0.5)
     writec("<el>...")
     for s in colorList:
         writec("<green><u>%s<reset>..." % s)
         sleep(0.05)
         writec("<el>...")
     writec("<reset>Listing of all ANSI colors...><red><u> DONE !<reset>...")
-    sleep(0.9)
+    sleep(0.5)
     writec("<el>")
     if file_name:
         mfile = open(file_name, 'w')
@@ -685,14 +796,19 @@ def _generate_color_sh(file_name=None):
 # List of colors
 # ==============
 """)
-    # FIXME it appears to be failing on Python 3
+    # FIXED it appeared to be failing on Python 3, now with this colorDict it works very well!
     res = ""
-    for s in colorList:
-        exec("res = ('%%s' %% %s)" % s.replace('\x1b', '\\\\x1b'))  # Bad to use exec !
+    for s in colorDict:
+        res = colorDict[s]
+        # print("""DEBUG: exec("res = ('%%s' %% %s)""" % s.replace('\x1b', '\\\\x1b'))
+        # exec("res = ('%%s' %% %s)" % s.replace('\x1b', '\\\\x1b'))  # Bad to use exec !
         # Unescaping special characters.
-        res = res.replace('\x1b', '\\033').replace('\r', '\\r')
-        mfile.write("export %s=\"%s\"\n" % (s, (r"%s" % res)))
-        # FIXED the r"%s" above is important
+        res = res.replace('\x1b', '\\033').replace('\r', '\\r').replace('\007', '\\007')
+        # print("DEBUG 1: res =", res)
+        mfile.write("export %s=\"%s\"\n" % (s, res))
+        # print("""DEBUG 2: mfile.write("export %s=\\"%s\\"\\n" """ % (s, res))
+        # mfile.write("export %s=\"%s\"\n" % (s, (r"%s" % res)))
+        # the r"%s" above is important ?
     mfile.write("# DONE\n\n")
     if file_name:
         writec("<green> The file %s have been creating.<reset> (C) Lilian Besson 2012-2016.\n" % file_name)
@@ -727,13 +843,13 @@ Use this file <u>~/.color.sh<U> with other GNU Bash scripts, simply by sourcing 
 
 <b>About the <u>convention<U> for the names of the colors:<reset>
 - for the eight colors black, red, green, yellow, blue, magenta, cyan, white:
-  + the name in minuscule is for color **with bold** (example <yellow>'yellow'<reset>),
-  + the name starting with 'B' is for color **without bold** (example <Byellow>'Byellow'<reset>),
+  + the name in minuscule is for color <u>with bold<reset> (example <yellow>'yellow'<reset>),
+  + the name starting with 'B' is for color <u>without bold<reset> (example <Byellow>'Byellow'<reset>),
   + the name starting with a capital letter is for the background color (example <Yellow>'Yellow'<reset>);
-- for the special effects (blink, italic (i), bold (b), underline (u), negative), <u>**not always supported**<reset>:
-  + the name in minuscule is to <u>**turn on**<reset> the effect (example 'u' to <u>underline<U>),
-  + the name starting in capital letter is to <u>**turn down**<reset> the effect (example 'U' to stop underline);
-- for the other special effects (nocolors, default, Default, clear, el), the effect is <u>**immediate**<reset> (and seems to be well supported).
+- for the special effects (blink, italic (i), bold (b), underline (u), negative), <u>not always supported<reset>:
+  + the name in minuscule is to <u>turn on<reset> the effect (for example 'u' to <u>underline<U>),
+  + the name starting in capital letter is to <u>turn down<reset> the effect (for example 'U' to stop underline);
+- for the other special effects (nocolors, default, Default, clear, el), the effect is <u>immediate<reset> (and seems to be well supported).
 
 <yellow>About
 =====<reset>
@@ -752,7 +868,7 @@ The reference page for ANSI code is : <u>https://en.wikipedia.org/wiki/ANSI_esca
     #: Description for the part with '--file' and '--generate' options.
     group = myparser.add_argument_group('Generation of a GNU Bash color aliases file')
     # Add lats two options
-    group.add_argument("-g", "--generate", help="Print all ANSI Colors as 'export name = value'.", action="store_true")  # , required = True)
+    group.add_argument("-g", "--generate", help="Print all ANSI Colors as 'export name=\"value\"'.", action="store_true")  # , required = True)
     group.add_argument("-f", "--file", help="If present, and with --generate option, don't print the values, but export them in the file FILE (e.g. FILE = ~/.color.sh)", default=None)
 
     #: The parser is done.
@@ -776,8 +892,8 @@ The reference page for ANSI code is : <u>https://en.wikipedia.org/wiki/ANSI_esca
 # Remove the scripts values here
 # FIXED: be sure we removed exactly the good ones
 else:
-    del _generate_color_sh
-    del _run_complete_tests
+    # del _generate_color_sh
+    # del _run_complete_tests
     del _parser_default
     del _default_description
     del _default_epilogue

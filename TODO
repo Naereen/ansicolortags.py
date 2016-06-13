@@ -1,12 +1,11 @@
-===============================
-TODOs for ansicolortags package
-===============================
+=================================
+TODOs for ansicolortags package ?
+=================================
 
-Other changes
--------------
-
-1. Improve support of Windows.
+1. Improve support of Windows ?
 2. Add automated tests.
-3. Durty to use all these ``exec()``, should be avoided... Find something cleaner!
+3. Use travis or another solution to automatically check if the build passes after each commit.
+4. Write a comparison with other ANSI color modules, showing the advantages of mine (and disadvantages).
+5. Write a page on the doc about the use of :download:`.color.sh` in a GNU bash script.
 
 .. (c) Lilian Besson 2012-2016
