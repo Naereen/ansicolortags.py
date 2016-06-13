@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Ansicolortags.py : ">
+    <meta name="description" content="Ansicolortags.py : A Python script and module to simply and efficiently use ANSI colors in a terminal application from a Python program (https://pypi.python.org/pypi/ansicolortag)">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
@@ -19,7 +19,7 @@
           <a id="forkme_banner" href="https://github.com/Naereen/ansicolortags.py">View on GitHub</a>
 
           <h1 id="project_title">Ansicolortags.py</h1>
-          <h2 id="project_tagline"></h2>
+          <h2 id="project_tagline">A Python script and module to simply and efficiently use ANSI colors in a terminal application from a Python program (https://pypi.python.org/pypi/ansicolortag)</h2>
 
             <section id="downloads">
               <a class="zip_download_link" href="https://github.com/Naereen/ansicolortags.py/zipball/master">Download this project as a .zip file</a>
@@ -34,9 +34,24 @@
         <h1>
 <a id="ansicolortags" class="anchor" href="#ansicolortags" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ansicolortags</h1>
 
-<p><a href="https://pypi.python.org/pypi/ansicolortag">A Python script and module</a> to simply and efficiently use ANSI colors in a terminal application from a Python program.</p>
+<p><a href="https://pypi.python.org/pypi/ansicolortags">ansicolortags, a Python script and module</a> to simply and efficiently use ANSI colors in a command line Python program.</p>
 
-<p><img src="https://readthedocs.org/projects/ansicolortags/badge/?version=latest" alt="Documentation on ansicolortags.readthedocs.io" title="Documentation on ansicolortags.readthedocs.io"></p>
+<p>The <code>ansicolortags</code> module provides an efficient and useful function
+(<code>printc</code>) to print colored text in a terminal application with Python 2 and 3, with a <em>HTML-tag</em> like style:</p>
+
+<div class="highlight highlight-source-python"><pre><span class="pl-k">from</span> ansicolortags <span class="pl-k">import</span> printc  <span class="pl-c"># Import the function</span>
+<span class="pl-c"># ...</span>
+printc(<span class="pl-s"><span class="pl-pds">"</span>France flag is &lt;blue&gt;blue&lt;reset&gt;, &lt;red&gt;red&lt;reset&gt;, and &lt;white&gt;white&lt;reset&gt; !<span class="pl-pds">"</span></span>)</pre></div>
+
+<p>will print the text <em>"France flag is blue, white and red !"</em> with appropriate colors (if the output supports them -- a terminal should but a file or a pipe should not).</p>
+
+<p>All ANSI colors code are defined with this <em>HTML-tag like style</em>: <code>&lt;blue&gt;</code>, <code>&lt;red&gt;</code> etc.
+<strong>This point is the main interest of this module,</strong>
+because all others modules define function to print with some colours.</p>
+
+<p><a href="http://ansicolortags.readthedocs.io/?badge=latest"><img src="https://readthedocs.org/projects/ansicolortags/badge/?version=latest" alt="Documentation on ansicolortags.readthedocs.io" title="Documentation on ansicolortags.readthedocs.io"></a></p>
+
+<p>For instance, the screenshot below shows the module begin used to print a colored text (the help of the script) which looks like this:</p>
 
 <p><img src="https://github.com/Naereen/ansicolortags.py/raw/master/examples/help.png" alt="Screenshot of the doc, colored with the script" title="Screenshot of the doc, colored with the script"></p>
 
@@ -50,16 +65,14 @@
 <h3>
 <a id="language" class="anchor" href="#language" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Language?</h3>
 
-<p>Python v2.7+ or Python v3.2+.</p>
+<p>Python v2.7+ or Python v3.1+.</p>
 
-<p>This project is hosted on <a href="https://pypi.python.org/pypi/ansicolortag" title="Pypi !">the Pypi package repository</a>.</p>
+<p>This project is hosted on <a href="https://pypi.python.org/pypi/ansicolortags" title="Pypi !">the Pypi package repository</a>.</p>
 
 <h2>
 <a id="documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
 
 <p>The complete documentation of the module is available, see <a href="http://ansicolortags.readthedocs.io/" title="on-line">here on readthedocs.io</a>.</p>
-
-<p>A short documentation is also available <a href="http://pydoc.net/Python/ansicolortags/0.1/#description">here on pydoc.net</a>.</p>
 
 <p><strong>All the details (installation, options, etc) are in the doc</strong>.
 Anyway, here are some information.</p>
@@ -74,20 +87,21 @@ Anyway, here are some information.</p>
 <h2>
 <a id="how-to-install-it" class="anchor" href="#how-to-install-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to install it</h2>
 
-<p><a href="https://bitbucket.org/lbesson/ansicolortags.py/raw/master/ansicolortags.py">Download it</a> or copy it from this git repository, then launch <code>python setup.py install</code>.
-More details can be found in the <a href="INSTALL">INSTALL</a> file.</p>
+<p><a href="https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.3.tar.gz">Download the archive</a> from this git repository, extract it, then launch <code>python setup.py install</code> in the directory.</p>
+
+<p>More details can be found in the <a href="INSTALL">INSTALL</a> file.</p>
 
 <h2>
 <a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h2>
 
-<p>The project is entirely written in Python, compatible with both version 2.7+ and 3.2+.</p>
+<p>The project is entirely written in Python, compatible with both version 2.7+ and 3.1+.</p>
 
-<p>For more details about the <strong>Python</strong> language, see <a href="http://www.python.org" title="Python power !">the official site</a>.</p>
+<p>For more details about the <strong>Python</strong> language, see <a href="https://www.python.org" title="Python power !">the official site</a>.</p>
 
 <h2>
 <a id="platforms" class="anchor" href="#platforms" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Platforms</h2>
 
-<p>The project have been developed on <em>GNU/Linux</em> (Ubuntu 11.10).</p>
+<p>The project have been developed on <em>GNU/Linux</em> (Ubuntu 11.10 to 15.10).</p>
 
 <h4>
 <a id="warning--windows-" class="anchor" href="#warning--windows-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Warning : Windows ?</h4>
