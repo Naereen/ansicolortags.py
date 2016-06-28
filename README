@@ -1,8 +1,8 @@
-ansicolortags
-=============
+``ansicolortags``
+=================
 
 [ansicolortags, a Python script and module](https://pypi.python.org/pypi/ansicolortags) to simply and efficiently use ANSI colors in a command line Python program.
-
+[![ansicolortags in pypi](https://img.shields.io/pypi/v/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags)
 
 The ``ansicolortags`` module provides an efficient and useful function
 (``printc``) to print colored text in a terminal application with Python 2 and 3, with a *HTML-tag* like style:
@@ -20,10 +20,6 @@ All ANSI colors code are defined with this *HTML-tag like style*: ``<blue>``, ``
 **This point is the main interest of this module,**
 because all others modules define function to print with some colours.
 
-
-[![Documentation on ansicolortags.readthedocs.io](https://readthedocs.org/projects/ansicolortags/badge/?version=latest "Documentation on ansicolortags.readthedocs.io")](http://ansicolortags.readthedocs.io/?badge=latest)
-
-
 For instance, the screenshot below shows the module begin used to print a colored text (the help of the script) which looks like this:
 
 [![Screenshot of the doc, colored with the script](https://github.com/Naereen/ansicolortags.py/raw/master/examples/help.png "Screenshot of the doc, colored with the script")]((http://ansicolortags.readthedocs.io/?badge=latest))
@@ -34,12 +30,15 @@ For instance, the screenshot below shows the module begin used to print a colore
 [Lilian Besson](https://bitbucket.org/lbesson/).
 
 ### Language?
-Python v2.7+ or Python v3.1+.
+Python v2.7+ or Python v3.4+.
 
 This project is hosted on [the Pypi package repository](<https://pypi.python.org/pypi/ansicolortags> "Pypi !").
 
 Documentation
 -------------
+
+[![Documentation on ansicolortags.readthedocs.io](https://readthedocs.org/projects/ansicolortags/badge/?version=latest "Documentation on ansicolortags.readthedocs.io")](http://ansicolortags.readthedocs.io/?badge=latest)
+[![ansicolortags in pypi](https://img.shields.io/pypi/v/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags)
 
 The complete documentation of the module is available, see [here on readthedocs.io](<http://ansicolortags.readthedocs.io/> "on-line").
 
@@ -88,3 +87,5 @@ License
 -------
 
 This project is released under the [MIT License](https://lbesson.mit-license.org/).
+
+[![Analytics](https://ga-beacon.appspot.com/UA-38514290-17/github.com/Naereen/ansicolortags.py/README.md?pixel)](https://github.com/Naereen/ansicolortags.py/)
