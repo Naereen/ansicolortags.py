@@ -135,8 +135,25 @@ Complete documentation
 
 """
 
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
+
+# %% Usual Modules
+# Should we make them hidden from the interface of the script. Idea : remove from __all__ ?
+import os
+import sys
+from subprocess import Popen
+
+try:
+    from time import sleep
+except ImportError:
+    def sleep(f):
+        """ Replacement of time.sleep()."""
+        print("time.sleep({}) should have been used.".format(f))
+
+
+__author__ = 'Lilian Besson'
+__version__ = '0.4'
+__date__ = '2016-07-02T10:33:39'
 
 
 # %% Program part
@@ -181,25 +198,9 @@ aliases for classic markup (/!\\, /?\\, 'WARNING', 'INFO' and 'ERROR').
 warning, question, WARNING, INFO, ERROR:
 """
 
-__author__ = 'Lilian Besson'
-__version__ = '0.3'
-__date__ = '2016-06-07T08:42:25+02:00'
-
-# %% Usual Modules
-# Should we make them hidden from the interface of the script. Idea : remove from __all__ ?
-import os
-import sys
-from subprocess import Popen
-
-try:
-    from time import sleep
-except ImportError:
-    def sleep(f):
-        """ Replacement of time.sleep()."""
-        print("time.sleep({}) should have been used.".format(f))
-
 
 # %% Default values for new parsers
+# FIXME switch to use docopt (https://github.com/docopt/docopt) instead of argparse
 
 def _default_epilogue(version):
     """ Default epilogue used by a new parser."""
@@ -496,9 +497,9 @@ def sprint(chainWithTags, left='<', right='>', verbose=False):
     if verbose:
         print("\tlls =", lls)
     res = ""
-    for ii in range(len(lls)):
-        for j in range(len(lls[ii])):
-            res += lls[ii][j]
+    for _, llsii in enumerate(lls):
+        for _, llsiij in enumerate(llsii):
+            res += llsiij
     return res
 
 
@@ -514,6 +515,8 @@ def erase(chainWithTags, left='<', right='>', verbose=False):
       This is blue. And <this> is white. Now this is red because I am <angry> !
 
     This example seems exactly the same that the previous one in the documentation, but it's not (it is impossible to put color in the output of a Python example in Sphinx documentation, so there is **no color in output** in the examples... but be sure there is the real output !).
+
+    .. warning:: This function can mess up a string which has unmatched opening and closing tags (``<`` without a ``>`` or ``>`` without a ``<``), use it carefully.
     """
     ls = chainWithTags.split(left)
     if verbose:
@@ -536,18 +539,47 @@ def erase(chainWithTags, left='<', right='>', verbose=False):
     if verbose:
         print("\tlls =", lls)
     res = ""
-    for ii in range(len(lls)):
-        for j in range(len(lls[ii])):
-            res += lls[ii][j]
+    for _, llsii in enumerate(lls):
+        for _, llsiij in enumerate(llsii):
+            res += llsiij
     return res
 
 
-def printc(chainWithTags, left='<', right='>', **kw):
-    """ printc(chainWithTags, left='<', right='>', **kw) -> unit
+# FIXED how to add this *objects in Python 2 ?
+# def printc(chainWithTags, *objects, left='<', right='>', sep=' ', end='\n', erase=False, **kwargs):
+# I removed the keywords arguments
+#          left='<', right='>', sep=' ', end='\n', erase=False,
+# and define them manually by poping keys from kwargs...
+# Cf. https://www.python.org/dev/peps/pep-3102/
+# https://docs.python.org/3/tutorial/controlflow.html#arbitrary-argument-lists
 
-    A shortcut to ``print(sprint(chainWithTags))`` : analyze all tags (convert the tags like ``<red>`` to their ANSI code value, like :py:data:`red`), and print the result.
+def printc(chainWithTags, *objects, **kwargs):
+    """ printc(chainWithTags, *objects, left='<', right='>', sep=' ', end='\\n', erase=False, **kwargs) -> unit
+
+    Basically a shortcut to ``print(sprint(chainWithTags))`` : it analyzes all tags (i.e., it converts the tags like ``<red>`` to their ANSI code value, like :py:data:`red`), and then it prints the result.
+
+    Example (in a terminal the colors, and the bold and underlining effects would be there):
+
+    >>> printc("<reset><white>« <u>Fifty shades of <red>red<white><U> » could be a <green>good<white> book, <b>if it existed<B>.")
+    « Fifty shades of red » could be a good book, if it existed.
+
+
+    It accepts one or more "things" to print, exactly like :py:func:`print`: for each value ``arg_i`` in ``*objects``:
+
+     - if ``arg_i`` is a string, it is converted using ``sprint(arg_i, left=left, right=right)`` (:py:func:`sprint`), and then passed to :py:func:`print`.
+     - otherwise ``arg_i`` is passed to :py:func:`print` without modification (in the same order, of course).
+
+    Example with more than one object:
+
+    >>> print("OK n =", 17, "and z =", 1 + 5j, ".")
+    OK n = 17 and z = (1+5j) .
+    >>> printc("<green>OK<white> n =<magenta>", 17, "<white>and z =<blue>", 1 + 5j, "<reset>.")  # in a terminal, the output will have colors:
+    OK n = 17 and z = (1+5j) .
+
 
     This is the more useful function in this package.
+
+    - If ``erase = True``, then :py:func:`erase` is used instead of :py:func:`sprint`
 
     .. hint::
 
@@ -559,8 +591,8 @@ def printc(chainWithTags, left='<', right='>', **kw):
                from ansicolortags import printc
            except ImportError:
                print("WARNING: ansicolortags was not found, disabling colors instead.\\nPlease install it with 'pip install ansicolortags'")
-               def printc(*a, **kw):
-                   print(*a, **kw)
+               def printc(*a, **kwargs):
+                   print(*a, **kwargs)
 
 
     .. hint::
@@ -571,7 +603,35 @@ def printc(chainWithTags, left='<', right='>', **kw):
        `strapdown2html.py <https://bitbucket.org/lbesson/bin/src/master/strapdown2html.py>`_,
        `calc_interets.py <https://bitbucket.org/lbesson/bin/src/master/calc_interets.py>`_...
     """
-    print(sprint(chainWithTags, left=left, right=right), **kw)
+    left = kwargs.pop('left') if 'left' in kwargs else '<'
+    right = kwargs.pop('right') if 'right' in kwargs else '>'
+    sep = kwargs.pop('sep') if 'sep' in kwargs else ' '
+    end = kwargs.pop('end') if 'end' in kwargs else '\n'
+    doerase = kwargs.pop('erase') if 'erase' in kwargs else False
+    # # DEBUG
+    # print("chainWithTags:")
+    # print(chainWithTags)
+    # print("objects:")
+    # print(objects)
+    # print("kwargs:")
+    # print(kwargs)
+    # print("left:", left)
+    # print("right:", right)
+    # print("sep:", sep)
+    # print("end:", end)
+    # print("doerase:", doerase)
+    # DONE for argument handling
+    if len(objects) == 0:
+        print(sprint(chainWithTags, left=left, right=right), sep=sep, end=end, **kwargs)
+    else:
+        fullargs = (chainWithTags,) + objects
+        # DEBUG
+        # print("fullargs:")
+        # print(fullargs)
+        if doerase:  # XXX cannot be called erase, it is already the function
+            print(*(erase(s, left=left, right=right) if isinstance(s, str) else s for s in fullargs), sep=sep, end=end, **kwargs)
+        else:
+            print(*(sprint(s, left=left, right=right) if isinstance(s, str) else s for s in fullargs), sep=sep, end=end, **kwargs)
 
 
 def writec(chainWithTags="", out=sys.stdout, left='<', right='>', flush=True):

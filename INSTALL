@@ -47,11 +47,11 @@ be sure to install it *with both* ``pip2`` and ``pip3`` :
 
 Or you can also follow these 4 steps:
 
- 1. download the file `ansicolortags.tar.gz <https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.3.tar.gz>`_ from Bitbucket, or `from PyPi <https://pypi.python.org/pypi/ansicolortags>`_ (if needed, it is `signed numerically <https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.3.tar.gz.asc>`_ with `my PGP key <http://perso.crans.org/besson/Lilian_Besson.asc>`_);
+ 1. download the file `ansicolortags.tar.gz <https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.4.tar.gz>`_ from Bitbucket, or `from PyPi <https://pypi.python.org/pypi/ansicolortags>`_ (if needed, it is `signed numerically <https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.4.tar.gz.asc>`_ with `my PGP key <http://perso.crans.org/besson/Lilian_Besson.asc>`_);
 
  2. extract it (with :code:`tar xzfv`, or a graphical solution, like File Roller);
 
- 3. then go in the subdirectory (:code:`cd ansicolortags-0.3/`);
+ 3. then go in the subdirectory (:code:`cd ansicolortags-0.4/`);
 
  4. and finally install it with Python distutils ``setup.py`` tool:
 

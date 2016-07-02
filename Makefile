@@ -69,14 +69,16 @@ notify_archive:	archive
 cleanAll: clean_build clean_pyc
 
 pylint3k:
-	pylint --py3k ansicolortags.py
+	-pylint --py3k ansicolortags.py > ansicolortags.pylint3k.txt
+	pylint --py3k ansicolortags.py | less
 
 pylint:
 	-pylint -d broad-except ansicolortags.py > ansicolortags.pylint.txt
 	pylint -d broad-except ansicolortags.py | less
 
 pydoctxt:
-	pydoc ansicolortags > ansicolortags.pydoc.txt
+	-pydoc ansicolortags > ansicolortags.pydoc.txt
+	pydoc ansicolortags | less
 
 archive:	clean_pyc
 	if [ -f /home/lilian/ansicolortags.tar.xz ]; then mv -f /home/lilian/ansicolortags.tar.xz /home/lilian/Dropbox/ ; fi

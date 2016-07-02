@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: ansicolortags
-Version: 0.1
+Version: 0.4
 Summary: ansicolortags brings a simple and powerful way to use colours in a terminal application with Python 2 and 3.
 Home-page: https://bitbucket.org/lbesson/ansicolortags.py/
 Author: Lilian Besson

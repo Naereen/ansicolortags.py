@@ -22,7 +22,7 @@ because all others modules define function to print with some colours.
 
 For instance, the screenshot below shows the module begin used to print a colored text (the help of the script) which looks like this:
 
-[![Screenshot of the doc, colored with the script](https://github.com/Naereen/ansicolortags.py/raw/master/examples/help.png "Screenshot of the doc, colored with the script")]((http://ansicolortags.readthedocs.io/?badge=latest))
+[![Screenshot of the doc, colored with the script](examples/help.png "Screenshot of the doc, colored with the script")]((http://ansicolortags.readthedocs.io/?badge=latest))
 
 ----
 
@@ -30,7 +30,7 @@ For instance, the screenshot below shows the module begin used to print a colore
 [Lilian Besson](https://bitbucket.org/lbesson/).
 
 ### Language?
-Python v2.7+ or Python v3.4+.
+Python v2.7+ or Python v3.1+.
 
 This project is hosted on [the Pypi package repository](<https://pypi.python.org/pypi/ansicolortags> "Pypi !").
 
@@ -55,7 +55,7 @@ The project consists in just the main script [``ansicolortags.py``](ansicolortag
 How to install it
 -----------------
 
-[Download the archive](https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.3.tar.gz) from this git repository, extract it, then launch ``python setup.py install`` in the directory.
+[Download the archive](https://bitbucket.org/lbesson/ansicolortags.py/downloads/ansicolortags-0.4.tar.gz) from this git repository, extract it, then launch ``python setup.py install`` in the directory.
 
 More details can be found in the [INSTALL](INSTALL) file.
 
@@ -81,11 +81,11 @@ Any [feedback](http://perso.crans.org/besson/contact/en/) on this is welcome!
 Contact me
 ----------
 
-Feel free to contact me, either with a GitHub message (my profile is [Naereen](https://github.com/Naereen/ "here")) or with a Bitbucket message (my profile is [lbesson](https://bitbucket.org/lbesson/ "here")), or via an email at **lilian DOT besson AT ens-cachan DOT org**.
+Feel free to contact me, with a Bitbucket message (my profile is [lbesson](https://bitbucket.org/lbesson/ "here")), or via an email at **lilian DOT besson AT ens-cachan DOT org**.
 
 License
 -------
 
 This project is released under the [MIT License](https://lbesson.mit-license.org/).
 
-[![Analytics](https://ga-beacon.appspot.com/UA-38514290-17/github.com/Naereen/ansicolortags.py/README.md?pixel)](https://github.com/Naereen/ansicolortags.py/)
+[![Analytics](https://ga-beacon.appspot.com/UA-38514290-17/bitbucket.org/lbesson/ansicolortags.py/README.md?pixel)](https://bitbucket.org/lbesson/ansicolortags.py/)

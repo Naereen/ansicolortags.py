@@ -1,7 +1,3 @@
-************* Module ansicolortags
-W:203, 0: FIXME switch to use docopt (https://github.com/docopt/docopt) instead of argparse (fixme)
-W:478, 0: TODO improve efficiency of this core algorithm? (fixme)
-W:631, 0: XXX cannot be called erase, it is already the function (fixme)
 
 
 Report
@@ -14,13 +10,13 @@ Statistics by type
 +---------+-------+-----------+-----------+------------+---------+
 |type     |number |old number |difference |%documented |%badname |
 +=========+=======+===========+===========+============+=========+
-|module   |1      |1          |=          |100.00      |0.00     |
+|module   |1      |1          |=          |NC          |NC       |
 +---------+-------+-----------+-----------+------------+---------+
 |class    |0      |0          |=          |0           |0        |
 +---------+-------+-----------+-----------+------------+---------+
 |method   |0      |0          |=          |0           |0        |
 +---------+-------+-----------+-----------+------------+---------+
-|function |16     |0          |+16.00     |100.00      |18.75    |
+|function |0      |16         |-16.00     |0           |0        |
 +---------+-------+-----------+-----------+------------+---------+
 
 
@@ -65,25 +61,14 @@ Messages by category
 +-----------+-------+---------+-----------+
 |refactor   |0      |0        |=          |
 +-----------+-------+---------+-----------+
-|warning    |3      |0        |+3.00      |
+|warning    |0      |3        |-3.00      |
 +-----------+-------+---------+-----------+
 |error      |0      |0        |=          |
 +-----------+-------+---------+-----------+
 
 
 
-Messages
---------
-
-+-----------+------------+
-|message id |occurrences |
-+===========+============+
-|fixme      |3           |
-+-----------+------------+
-
-
-
 Global evaluation
 -----------------
-Your code has been rated at 9.88/10 (previous run: 10.00/10, -0.12)
+Your code has been rated at 10.00/10 (previous run: 9.88/10, +0.12)
 

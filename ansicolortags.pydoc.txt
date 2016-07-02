@@ -57,6 +57,8 @@ DESCRIPTION
     To store a string, use :py:func:`sprint` (i.e. print to a string, *sprint*), like this: ::
     
         >>> example = sprint("France flag is <blue>blue<white>white<red>red<white>, Italy flag have <green>green on it<white>.")
+        >>> example
+        'France flag is [01;34mblue[01;37mwhite[01;31mred[01;37m, Italy flag have [01;32mgreen on it[01;37m.'
     
     
     The string ``example`` can then be printed, with colors, with: ::
@@ -65,9 +67,10 @@ DESCRIPTION
         France flag is bluewhitered, Italy flag have green on it.
     
     
-    To directly print a string colored by tags, use :py:func:`printc`: ::
+    To directly print a string colored by tags, use :py:func:`printc` (colors will be there if you try this in your terminal): ::
     
         >>> printc("Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>.")
+        Batman's costum is black, Aquaman's costume is blue and green.
     
     
     .. seealso::
@@ -75,13 +78,13 @@ DESCRIPTION
        This is the most useful function. To do the same, but on any file, use :py:func:`writec`.
     
     
-    Moreover, the function :py:func:`erase` can also be useful to simply delete all *valid* color tags ::
+    Moreover, the function :py:func:`erase` can also be useful to simply delete all *valid* color tags: ::
     
         >>> print(erase("Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>, and this is a non-valid <tag>, so it is kept like this."))
         Batman's costum is black, Aquaman's costum is blue and green, and this is a non-valid <tag>, so it is kept like this
     
     
-    In this last example, an ``<el>`` tag (:py:data:`el`) is used to erase the current content of the line, useful to make a *dynamical* print ::
+    In this last example, an ``<el>`` tag (:py:data:`el`) is used to erase the current content of the line, useful to make a *dynamical* print: ::
     
        >>> writec("<red>Computing <u>len(str(2**562016))<reset>...."); tmp = len(str(2**562016)); writec("<el><green>Done !<reset>")
        Done !
@@ -112,44 +115,45 @@ DESCRIPTION
     
     ------------------------------------------------------------------------------
     
-    About
-    =====
+    Elsewhere online
+    ================
     
     This project can be found on-line:
     
-    * `here on BitBucket <https://bitbucket.org/lbesson/ansicolortags.py>`_;
-    * `here on PyPi <https://pypi.python.org/pypi/ansicolortags>`_.
+    * here on BitBucket: `<https://bitbucket.org/lbesson/ansicolortags.py>`_
+    * here on PyPi: `<https://pypi.python.org/pypi/ansicolortags>`_
     
+    
+    And some documentation on ANSI codes:
     
     * The reference page for ANSI code is : `here on Wikipedia <https://en.wikipedia.org/wiki/ANSI_escape_code>`_.
-    * The reference page for XTitle escape code is : `here <http://www.faqs.org/docs/Linux-mini/Xterm-Title.html>`_.
-    
-    Complete documentation
-    ======================
-    
-    The doc is available on-line, on `Read the Docs <https://www.readthedocs.org/>`_ :
-    `<http://ansicolortags.readthedocs.io/>`_ !
+    * A reference page for XTitle escape code is : `here <http://www.faqs.org/docs/Linux-mini/Xterm-Title.html>`_.
     
     Copyrigth
     =========
     
     © Lilian Besson, 2012-2016.
+    
+    Complete documentation
+    ======================
+    
+    .. note:: The doc is available on-line, on `Read the Docs <https://www.readthedocs.org/>`_: `<http://ansicolortags.readthedocs.io/>`_.
 
 FUNCTIONS
     Reset()
         Reset() -> unit
         
-        Try to reset the current ANSI codes buffer, using :py:data:`reset`.
+        **Try to** reset the current ANSI codes buffer, using :py:data:`reset`.
     
     clearLine()
         clearLine() -> unit
         
-        Try to clear the current line using ANSI code :py:data:`el`.
+        **Try to** clear the current line using ANSI code :py:data:`el`.
     
     clearScreen()
         clearScreen() -> unit
         
-        Try to clear the screen using ANSI code :py:data:`clear`.
+        **Try to** clear the screen using ANSI code :py:data:`clear`.
     
     erase(chainWithTags, left='<', right='>', verbose=False)
         erase(chainWithTags, left='<', right='>', verbose=False) -> string
@@ -163,6 +167,8 @@ FUNCTIONS
           This is blue. And <this> is white. Now this is red because I am <angry> !
         
         This example seems exactly the same that the previous one in the documentation, but it's not (it is impossible to put color in the output of a Python example in Sphinx documentation, so there is **no color in output** in the examples... but be sure there is the real output !).
+        
+        .. warning:: This function can mess up a string which has unmatched opening and closing tags (``<`` without a ``>`` or ``>`` without a ``<``), use it carefully.
     
     notify(msg='', obj='Notification sent by ansicolortags.notify', icon=None, verb=False)
         notify(msg='', obj='Notification sent by ansicolortags.notify', icon=None, verb=False) -> bool
@@ -178,32 +184,55 @@ FUNCTIONS
         - Return True if and only if the title have been correctly changed.
         - Fails simply if ``notify-send`` is not found.
     
-    printc(chainWithTags, left='<', right='>', **kw)
-        printc(chainWithTags, left='<', right='>', **kw) -> unit
+    printc(chainWithTags, *objects, **kwargs)
+        printc(chainWithTags, *objects, left='<', right='>', sep=' ', end='\n', erase=False, **kwargs) -> unit
         
-            A shortcut to ``print(sprint(chainWithTags))`` : analyze all tags (convert the tags like ``<red>`` to their ANSI code value, like :py:data:`red`), and print the result.
+        Basically a shortcut to ``print(sprint(chainWithTags))`` : it analyzes all tags (i.e., it converts the tags like ``<red>`` to their ANSI code value, like :py:data:`red`), and then it prints the result.
         
-            This is the more useful function in this package.
+        Example (in a terminal the colors, and the bold and underlining effects would be there):
         
-            .. hint::
+        >>> printc("<reset><white>« <u>Fifty shades of <red>red<white><U> » could be a <green>good<white> book, <b>if it existed<B>.")
+        « Fifty shades of red » could be a good book, if it existed.
         
-               I suggest to use `ansicolortags.py <https://pypi.python.org/pypi/ansicolortags>`_ in your own project with the following piece of code: ::
+        
+        It accepts one or more "things" to print, exactly like :py:func:`print`: for each value ``arg_i`` in ``*objects``:
+        
+         - if ``arg_i`` is a string, it is converted using ``sprint(arg_i, left=left, right=right)`` (:py:func:`sprint`), and then passed to :py:func:`print`.
+         - otherwise ``arg_i`` is passed to :py:func:`print` without modification (in the same order, of course).
+        
+        Example with more than one object:
+        
+        >>> print("OK n =", 17, "and z =", 1 + 5j, ".")
+        OK n = 17 and z = (1+5j) .
+        >>> printc("<green>OK<white> n =<magenta>", 17, "<white>and z =<blue>", 1 + 5j, "<reset>.")  # in a terminal, the output will have colors:
+        OK n = 17 and z = (1+5j) .
+        
+        
+        This is the more useful function in this package.
+        
+        - If ``erase = True``, then :py:func:`erase` is used instead of :py:func:`sprint`
+        
+        .. hint::
+        
+           I suggest to use `ansicolortags.py <https://pypi.python.org/pypi/ansicolortags>`_ in your own project with the following piece of code:
+        
+           .. code:: python
         
                try:
                    from ansicolortags import printc
                except ImportError:
-                   print("WARNING: ansicolortags was not found, disabling colors instead.
-        Please install it with 'pip install ansicolortags'")
-                   def printc(*a, **kw):
-                       print(*a, **kw)
+                   print("WARNING: ansicolortags was not found, disabling colors instead.\nPlease install it with 'pip install ansicolortags'")
+                   def printc(*a, **kwargs):
+                       print(*a, **kwargs)
         
-            .. hint::
         
-               During the last 4 years, `a lot of the small Python scripts I wrote <https://bitbucket.org/lbesson/bin/src/master/>`_ try to use this module to add some colors:
-               for example, `FreeSMS.py <https://bitbucket.org/lbesson/bin/src/master/FreeSMS.py>`_,
-               `plotnotes.py <https://bitbucket.org/lbesson/bin/src/master/plotnotes.py>`_,
-               `strapdown2html.py <https://bitbucket.org/lbesson/bin/src/master/strapdown2html.py>`_,
-               `calc_interets.py <https://bitbucket.org/lbesson/bin/src/master/calc_interets.py>`_...
+        .. hint::
+        
+           During the last 4 years, `a lot of the small Python scripts I wrote <https://bitbucket.org/lbesson/bin/src/master/>`_ try to use this module to add some colors:
+           for example, `FreeSMS.py <https://bitbucket.org/lbesson/bin/src/master/FreeSMS.py>`_,
+           `plotnotes.py <https://bitbucket.org/lbesson/bin/src/master/plotnotes.py>`_,
+           `strapdown2html.py <https://bitbucket.org/lbesson/bin/src/master/strapdown2html.py>`_,
+           `calc_interets.py <https://bitbucket.org/lbesson/bin/src/master/calc_interets.py>`_...
     
     sleep(...)
         sleep(seconds)
@@ -230,13 +259,14 @@ FUNCTIONS
            I know, it's not perfect.
            But, the syntax of color tags is so simple and so beautiful with this limitation that you will surely forgive me this, *won't you* ;) ?
         
-        Example: ::
+        
+        Example (where unknown tags are left unmodified, and the colors should be there): ::
         
             >>> print(sprint("<blue>This is blue.<white> And <this> is white.<red> Now this is red because I am <angry> !<green><white>"))
             This is blue. And <this> is white. Now this is red because I am <angry> !
         
         
-         This function is used in all the following, so all other function can also use ``left`` and ``right`` arguments.
+        This function is used in all the following, so all other function can also use ``left`` and ``right`` arguments.
     
     tocolor(mystring)
         tocolor(mystring) -> string
@@ -251,24 +281,24 @@ FUNCTIONS
         Useful to print colored text **to a file**, represented by the object ``out``.
         Also useful to print colored text, but without any trailing '\n' character.
         
-        Example:
-        
         In this example, before the long computation begin, it prints 'Computing 2**(2**(2**4)).....',
         and when the computation is done, erases the current line (with ``<el>`` tag, :py:data:`el`),
         and prints ' Done !' in green, and the result of the computation: ::
         
              >>> writec("<red>Computing<reset> 2**(2**(2**4))....."); tmp = 2**(2**(2**4)); writec("<el><green>Done !<reset>")
+             Done !
         
         
         This example show how to use this module to write colored data in a file.
         Be aware that this file now contains ANSI escape sequences.
         For example, :code:`$ cat /tmp/colored-text.txt` will well print the colors, but editing the file will show *hard values* of escape code: ::
         
-            >>> my_file = open('/tmp/colored-text.txt', mode = 'w')  # Opens an random file.
+            >>> my_file = open('/tmp/colored-text.txt', mode = 'w')  # Open an random file.
             >>> write("<blue>this is blue.<white>And <this> is white.<red>Now this is red because I am <angry> !<green><white>", file = my_file)
+            >>> # Now this file '/tmp/colored-text.txt' has some ANSI colored text in it.
         
         Remark:
-        Can also be used to simply reinitialize the ANSI colors buffer, but the function :py:func:`Reset` is here for this: ::
+        It can also be used to simply reinitialize the ANSI colors buffer, but the function :py:func:`Reset` is here for this: ::
         
             >>> writec("<reset>")
         
@@ -330,8 +360,8 @@ DATA
     White = '\x1b[47m'
     Yellow = '\x1b[43m'
     __author__ = 'Lilian Besson'
-    __date__ = '2016-06-07T08:42:25+02:00'
-    __version__ = '0.3'
+    __date__ = '2016-07-02T10:33:39'
+    __version__ = '0.4'
     absolute_import = _Feature((2, 5, 0, 'alpha', 1), (3, 0, 0, 'alpha', 0...
     b = '\x1b[1m'
     bell = '\x07'
@@ -363,10 +393,10 @@ DATA
     yellow = '\x1b[01;33m'
 
 VERSION
-    0.3
+    0.4
 
 DATE
-    2016-06-07T08:42:25+02:00
+    2016-07-02T10:33:39
 
 AUTHOR
     Lilian Besson
