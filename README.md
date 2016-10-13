@@ -24,6 +24,13 @@ For instance, the screenshot below shows the module begin used to print a colore
 
 [![Screenshot of the doc, colored with the script](examples/help.png "Screenshot of the doc, colored with the script")]((http://ansicolortags.readthedocs.io/?badge=latest))
 
+[![PyPI version](https://img.shields.io/pypi/v/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI format](https://img.shields.io/pypi/format/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI implementation](https://img.shields.io/pypi/implementation/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI status](https://img.shields.io/pypi/status/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+
 ----
 
 ### Author?
@@ -59,6 +66,11 @@ How to install it
 
 More details can be found in the [INSTALL](INSTALL) file.
 
+[![PyPI download total](https://img.shields.io/pypi/dt/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI download month](https://img.shields.io/pypi/dm/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI download week](https://img.shields.io/pypi/dw/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI download day](https://img.shields.io/pypi/dd/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+
 Dependencies
 ------------
 
@@ -78,14 +90,28 @@ It also have been quickly tested on *Windows 7* with the Cygwin environment and 
 It should also work on *Mac OS X*, but not been tested.
 Any [feedback](http://perso.crans.org/besson/contact/en/) on this is welcome!
 
+[![PyPI version](https://img.shields.io/pypi/v/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI format](https://img.shields.io/pypi/format/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI implementation](https://img.shields.io/pypi/implementation/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+[![PyPI status](https://img.shields.io/pypi/status/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+
 Contact me
 ----------
 
 Feel free to contact me, with a Bitbucket message (my profile is [lbesson](https://bitbucket.org/lbesson/ "here")), or via an email at **lilian DOT besson AT ens-cachan DOT org**.
 
-License
--------
+## :scroll: License ? [![GitHub license](https://img.shields.io/github/license/Naereen/ansicolortags.py.svg)](https://github.com/Naereen/ansicolortags.py/blob/master/LICENSE)
+This plug-in is published under the terms of the [MIT license](http://lbesson.mit-license.org/) (file [LICENSE.txt](LICENSE.txt)),
+© [Lilian Besson](https://GitHub.com/Naereen), 2016.
 
-This project is released under the [MIT License](https://lbesson.mit-license.org/).
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/Naereen/ansicolortags.py/graphs/commit-activity)
+[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](https://GitHub.com/Naereen/ama)
+[![Analytics](https://ga-beacon.appspot.com/UA-38514290-17/github.com/Naereen/ansicolortags.py/README.md?pixel)](https://GitHub.com/Naereen/ansicolortags.py/)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
-[![Analytics](https://ga-beacon.appspot.com/UA-38514290-17/bitbucket.org/lbesson/ansicolortags.py/README.md?pixel)](https://bitbucket.org/lbesson/ansicolortags.py/)
+[![ForTheBadge uses-badges](http://ForTheBadge.com/images/badges/uses-badges.svg)](http://ForTheBadge.com)
+[![ForTheBadge uses-git](http://ForTheBadge.com/images/badges/uses-git.svg)](https://GitHub.com/)
+
+[![ForTheBadge built-with-love](http://ForTheBadge.com/images/badges/built-with-love.svg)](https://GitHub.com/Naereen/)
