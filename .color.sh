@@ -18,7 +18,7 @@
 # Use this file .color.sh in other GNU Bash scripts, simply by sourcing it with:
 # $ [ -f ~/.color.sh ] && source ~/.color.sh
 # And then:
-# $ echo -e "French flag is ${blue}blue${white}, white, ${red}red${white}."
+# $ echo -e "${reset}French flag is ${blue}blue${reset}, ${white}white${reset}, ${red}red${reset}."
 #
 # Copyrigth
 # =========

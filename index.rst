@@ -35,7 +35,7 @@ This function works *exactly* like ``print("my string with color tags")``.
 
 For instance, a quick description of super hero's costumes can be done like this: ::
 
-    >>> printc("<reset><white>Batman's costume is <black>black<white>, Aquaman's costume is <blue>blue<white> and <green>green<white>, and Superman's costume is <red>red<white> and <blue>blue<white> ...")
+    >>> printc("<reset><white>Batman's costume is <black>black<white>, Aquaman's costume is <blue>blue<white> and <green>green<white>, and Superman's costume is <red>red<white> and <blue>blue<white> ...<reset>")
     Batman's costume is black, Aquaman's costume is blue and green, and Superman's costume is red and blue ...
 
 (Sorry, but it is hard to embed colors in the output of a Python command in a `Sphinx generated web-pages <http://sphinx-doc.org/>`_.)

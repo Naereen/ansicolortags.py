@@ -63,7 +63,7 @@ The string ``example`` can then be printed, with colors, with: ::
 
 To directly print a string colored by tags, use :py:func:`printc` (colors will be there if you try this in your terminal): ::
 
-    >>> printc("Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>.")
+    >>> printc("<reset><white>Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>.<reset>")
     Batman's costum is black, Aquaman's costume is blue and green.
 
 
@@ -74,13 +74,13 @@ To directly print a string colored by tags, use :py:func:`printc` (colors will b
 
 Moreover, the function :py:func:`erase` can also be useful to simply delete all *valid* color tags: ::
 
-    >>> print(erase("Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>, and this is a non-valid <tag>, so it is kept like this."))
+    >>> print(erase("<reset>Batman's costum is <black>black<white>, Aquaman's costum is <blue>blue<white> and <green>green<white>, and this is a non-valid <tag>, so it is kept like this.<reset>"))
     Batman's costum is black, Aquaman's costum is blue and green, and this is a non-valid <tag>, so it is kept like this
 
 
 In this last example, an ``<el>`` tag (:py:data:`el`) is used to erase the current content of the line, useful to make a *dynamical* print: ::
 
-   >>> writec("<red>Computing <u>len(str(2**562017))<reset>...."); tmp = len(str(2**562017)); writec("<el><green>Done !<reset>")
+   >>> writec("<reset><red>Computing <u>len(str(2**562017))<reset>...."); tmp = len(str(2**562017)); writec("<el><green>Done !<reset>")
    Done !
 
 The first part of the line 'Computing len(str(2**562017))....' have disappeared after the computation! (which takes about one second).
@@ -469,7 +469,7 @@ def sprint(chainWithTags, left='<', right='>', verbose=False):
 
     Example (where unknown tags are left unmodified, and the colors should be there): ::
 
-        >>> print(sprint("<blue>This is blue.<white> And <this> is white.<red> Now this is red because I am <angry> !<green><white>"))
+        >>> print(sprint("<reset><blue>This is blue.<white> And <this> is white.<red> Now this is red because I am <angry> !<green><reset>"))
         This is blue. And <this> is white. Now this is red because I am <angry> !
 
 
@@ -511,7 +511,7 @@ def erase(chainWithTags, left='<', right='>', verbose=False):
 
     Example:
 
-      >>> print(erase("<blue>This is blue.<white> And <this> is white.<red> Now this is red because I am <angry> !<reset>"))
+      >>> print(erase("<reset><blue>This is blue.<white> And <this> is white.<red> Now this is red because I am <angry> !<reset>"))
       This is blue. And <this> is white. Now this is red because I am <angry> !
 
     This example seems exactly the same that the previous one in the documentation, but it's not (it is impossible to put color in the output of a Python example in Sphinx documentation, so there is **no color in output** in the examples... but be sure there is the real output !).
@@ -560,7 +560,7 @@ def printc(chainWithTags, *objects, **kwargs):
 
     Example (in a terminal the colors, and the bold and underlining effects would be there):
 
-    >>> printc("<reset><white>« <u>Fifty shades of <red>red<white><U> » could be a <green>good<white> book, <b>if it existed<B>.")
+    >>> printc("<reset><white>« <u>Fifty shades of <red>red<white><U> » could be a <green>good<white> book, <b>if it existed<B>.<reset>")
     « Fifty shades of red » could be a good book, if it existed.
 
 
@@ -573,7 +573,7 @@ def printc(chainWithTags, *objects, **kwargs):
 
     >>> print("OK n =", 17, "and z =", 1 + 5j, ".")
     OK n = 17 and z = (1+5j) .
-    >>> printc("<green>OK<white> n =<magenta>", 17, "<white>and z =<blue>", 1 + 5j, "<reset>.")  # in a terminal, the output will have colors:
+    >>> printc("<reset><green>OK<white> n =<magenta>", 17, "<white>and z =<blue>", 1 + 5j, "<reset>.")  # in a terminal, the output will have colors:
     OK n = 17 and z = (1+5j) .
 
 
@@ -653,7 +653,7 @@ def writec(chainWithTags="", out=sys.stdout, left='<', right='>', flush=True):
     For example, :code:`$ cat /tmp/colored-text.txt` will well print the colors, but editing the file will show *hard values* of escape code: ::
 
         >>> my_file = open('/tmp/colored-text.txt', mode = 'w')  # Open an random file.
-        >>> write("<blue>this is blue.<white>And <this> is white.<red>Now this is red because I am <angry> !<green><white>", file = my_file)
+        >>> write("<reset><blue>this is blue.<white>And <this> is white.<red>Now this is red because I am <angry> !<green><reset>", file = my_file)
         >>> # Now this file '/tmp/colored-text.txt' has some ANSI colored text in it.
 
     Remark:
@@ -849,7 +849,7 @@ def _generate_color_sh(file_name=None):
 # Use this file .color.sh in other GNU Bash scripts, simply by sourcing it with:
 # $ [ -f ~/.color.sh ] && source ~/.color.sh
 # And then:
-# $ echo -e "French flag is ${blue}blue${white}, white, ${red}red${white}."
+# $ echo -e "${reset}French flag is ${blue}blue${reset}, ${white}white${reset}, ${red}red${reset}."
 #
 # Copyrigth
 # =========
