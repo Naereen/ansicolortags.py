@@ -15,12 +15,14 @@
 #
 # About
 # =====
-# Use this file .color.sh in other GNU Bash scripts, simply by sourcing him with
-# $ source ~/.color.sh
+# Use this file .color.sh in other GNU Bash scripts, simply by sourcing it with:
+# $ [ -f ~/.color.sh ] && source ~/.color.sh
+# And then:
+# $ echo -e "French flag is ${blue}blue${white}, white, ${red}red${white}."
 #
 # Copyrigth
 # =========
-# (C) Lilian Besson, 2012-2016.
+# (C) Lilian Besson, 2012-2017.
 #
 # List of colors
 # ==============
@@ -48,8 +50,8 @@ export Blue="\033[44m"
 export Magenta="\033[45m"
 export Cyan="\033[46m"
 export White="\033[47m"
-export Blink="\033[06m"
 export blink="\033[05m"
+export Blink="\033[06m"
 export nocolors="\033[0m"
 export default="\033[39m"
 export Default="\033[49m"
@@ -72,4 +74,3 @@ export ERROR="\033[0;39;49m\033[01;31mERROR\033[0;39;49m"
 export WARNING="\033[0;39;49m\033[01;33mWARNING\033[0;39;49m"
 export INFO="\033[0;39;49m\033[01;34mINFO\033[0;39;49m"
 # DONE
-

@@ -80,10 +80,10 @@ Moreover, the function :py:func:`erase` can also be useful to simply delete all 
 
 In this last example, an ``<el>`` tag (:py:data:`el`) is used to erase the current content of the line, useful to make a *dynamical* print: ::
 
-   >>> writec("<red>Computing <u>len(str(2**562016))<reset>...."); tmp = len(str(2**562016)); writec("<el><green>Done !<reset>")
+   >>> writec("<red>Computing <u>len(str(2**562017))<reset>...."); tmp = len(str(2**562017)); writec("<el><green>Done !<reset>")
    Done !
 
-The first part of the line 'Computing len(str(2**562016))....' have disappeared after the computation! (which takes about one second).
+The first part of the line 'Computing len(str(2**562017))....' have disappeared after the computation! (which takes about one second).
 
 
 Example of use (script)
@@ -126,7 +126,7 @@ And some documentation on ANSI codes:
 Copyrigth
 =========
 
-© Lilian Besson, 2012-2016.
+© Lilian Besson, 2012-2017.
 
 Complete documentation
 ======================
@@ -153,7 +153,7 @@ except ImportError:
 
 __author__ = 'Lilian Besson'
 __version__ = '0.4'
-__date__ = '2016-07-02T10:33:39'
+__date__ = '2017-08-09T10:33:39'
 
 
 # %% Program part
@@ -208,7 +208,7 @@ def _default_epilogue(version):
 
 <yellow>Copyrigth
 =========<reset>
-Version %s, (C) 2012-2016, Lilian Besson.""" % version
+Version %s, (C) 2012-2017, Lilian Besson.""" % version
 
 
 #: The default description, used when generate a parser by _parser_default function !
@@ -356,7 +356,7 @@ INFO = "%s%sINFO%s" % (reset, blue, reset)    #: A well colored INFO word, in :b
 
 
 #: List of all authorized colors. The dictionary :py:data:`colorDict` is more used.
-colorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'Bblack', 'Bred', 'Bgreen', 'Byellow', 'Bblue', 'Bmagenta', 'Bcyan', 'Bwhite', 'Black', 'Red', 'Green', 'Yellow', 'Blue', 'Magenta', 'Cyan', 'White', 'Blink', 'blink', 'nocolors', 'default', 'Default', 'italic', 'Italic', 'b', 'B', 'u', 'U', 'neg', 'Neg', 'clear', 'el', 'reset', 'bell', 'title', 'warning', 'question', 'ERROR', 'WARNING', 'INFO']
+colorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white', 'Bblack', 'Bred', 'Bgreen', 'Byellow', 'Bblue', 'Bmagenta', 'Bcyan', 'Bwhite', 'Black', 'Red', 'Green', 'Yellow', 'Blue', 'Magenta', 'Cyan', 'White', 'blink', 'Blink', 'nocolors', 'default', 'Default', 'italic', 'Italic', 'b', 'B', 'u', 'U', 'neg', 'Neg', 'clear', 'el', 'reset', 'bell', 'title', 'warning', 'question', 'ERROR', 'WARNING', 'INFO']
 #: List of all simple colors.
 simpleColorList = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
 
@@ -392,8 +392,8 @@ colorDict = {
     'Magenta': Magenta,
     'Cyan': Cyan,
     'White': White,
-    'Blink': Blink,
     'blink': blink,
+    'Blink': Blink,
     'nocolors': nocolors,
     'default': default,
     'Default': Default,
@@ -814,7 +814,7 @@ def _generate_color_sh(file_name=None):
           [ -f ~/.color.sh ] && . ~/.color.sh
     """
     if file_name:
-        writec("<green> The file %s is creating.<reset> (C) Lilian Besson, 2012-2016.\t" % file_name)
+        writec("<green> The file %s is creating.<reset> (C) Lilian Besson, 2012-2017.\t" % file_name)
     writec("<blue><u>Listing of all ANSI colors...<reset>")
     sleep(0.5)
     writec("<el>...")
@@ -846,12 +846,14 @@ def _generate_color_sh(file_name=None):
 #
 # About
 # =====
-# Use this file .color.sh in other GNU Bash scripts, simply by sourcing him with
-# $ source ~/.color.sh
+# Use this file .color.sh in other GNU Bash scripts, simply by sourcing it with:
+# $ [ -f ~/.color.sh ] && source ~/.color.sh
+# And then:
+# $ echo -e "French flag is ${blue}blue${white}, white, ${red}red${white}."
 #
 # Copyrigth
 # =========
-# (C) Lilian Besson, 2012-2016.
+# (C) Lilian Besson, 2012-2017.
 #
 # List of colors
 # ==============
@@ -871,7 +873,7 @@ def _generate_color_sh(file_name=None):
         # the r"%s" above is important ?
     mfile.write("# DONE\n\n")
     if file_name:
-        writec("<green> The file %s have been creating.<reset> (C) Lilian Besson 2012-2016.\n" % file_name)
+        writec("<green> The file %s have been creating.<reset> (C) Lilian Besson 2012-2017.\n" % file_name)
         sys.exit(0)
 
 
